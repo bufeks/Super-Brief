@@ -117,6 +117,90 @@
   nav.toc a { color: var(--ink); text-decoration: none; }
   nav.toc a:hover { text-decoration: underline; }
 
+  /* ----- source provenance: BRIEF vs EXTERNAL ----- */
+  /* Brief-derived content (what the client wrote in the brief) */
+  .from-brief {
+    background: #fff8e1;
+    border-left: 4px solid #c9a227;
+    padding: 12px 16px;
+    margin: 12px 0;
+    border-radius: 0 6px 6px 0;
+  }
+  .from-brief::before {
+    content: "📋 ブリーフ記載";
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    font-weight: 700;
+    color: #8a6d10;
+    margin-bottom: 6px;
+  }
+  /* Inline brief tag — for short references mid-paragraph */
+  .tag-brief {
+    display: inline-block;
+    background: #fff3c4;
+    color: #8a6d10;
+    font-size: 11px;
+    padding: 1px 7px;
+    border-radius: 3px;
+    margin-right: 4px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    vertical-align: 1px;
+  }
+  /* Inline external tag — companion to tag-brief for clarity in mixed paragraphs */
+  .tag-external {
+    display: inline-block;
+    background: #e6eff7;
+    color: #1f4f7a;
+    font-size: 11px;
+    padding: 1px 7px;
+    border-radius: 3px;
+    margin-right: 4px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    vertical-align: 1px;
+  }
+  /* Verbatim quotes from the brief */
+  blockquote.brief-quote {
+    background: #fffaea;
+    border-left: 3px solid #c9a227;
+    padding: 10px 14px;
+    margin: 10px 0;
+    font-size: 14px;
+    color: #5a4710;
+    font-style: italic;
+    border-radius: 0 6px 6px 0;
+  }
+  blockquote.brief-quote::before {
+    content: "ブリーフ原文より";
+    display: block;
+    font-style: normal;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    font-weight: 700;
+    color: #8a6d10;
+    margin-bottom: 4px;
+  }
+  /* Legend used in the cover area */
+  .provenance-legend {
+    display: flex;
+    gap: 14px;
+    margin-top: 14px;
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+  .provenance-legend .swatch {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    margin-right: 6px;
+    vertical-align: 1px;
+  }
+  .provenance-legend .swatch.brief { background: #c9a227; }
+  .provenance-legend .swatch.external { background: #1f4f7a; }
+
   /* ----- callouts ----- */
   .callout {
     border-left: 4px solid var(--ink);
@@ -285,6 +369,10 @@
     <dt>担当リサーチャー</dt><dd>Super-Brief (Claude Code)</dd>
     <dt>カバー領域</dt><dd>{{選択した 10 領域のうちの一覧}}</dd>
   </dl>
+  <div class="provenance-legend">
+    <span><span class="swatch brief"></span>ブリーフ由来 (クライアント記載)</span>
+    <span><span class="swatch external"></span>外部リサーチ由来 (Web / 統計 / 業界レポート — 末尾 Sources 参照)</span>
+  </div>
 </header>
 
 <!-- ============================================================
@@ -314,11 +402,24 @@
      ============================================================ -->
 <section id="decode">
   <h2>1. ブリーフ・デコード</h2>
+  <p style="font-size:13px;color:var(--ink-soft);">
+    このセクションは <strong>ブリーフ記載 (黄)</strong> と <strong>リサーチャー解釈</strong> を分けて表記します。
+  </p>
+
+  <h3>ブリーフ原文の主要記述</h3>
+  <blockquote class="brief-quote">
+    {{ブリーフから直接引用 — 課題 / 背景 / ターゲット / 媒体指定など中核部分を逐語で}}
+  </blockquote>
 
   <h3>表層課題</h3>
-  <p>{{ブリーフに書かれた課題を一文で}}</p>
+  <div class="from-brief">
+    {{ブリーフに書かれた課題を一文で}}
+  </div>
 
-  <h3>推測される真因</h3>
+  <h3>推測される真因 <span class="tag-external">解釈</span></h3>
+  <p style="font-size:12px;color:var(--ink-faint);margin-top:-6px;">
+    ※ 以下はブリーフを読んだ上でのリサーチャー仮説。ブリーフに書かれた事実とは区別。
+  </p>
   <ul>
     <li>{{真因仮説 1}}</li>
     <li>{{真因仮説 2}}</li>
@@ -326,20 +427,20 @@
 
   <h3>ターゲット定義</h3>
   <table>
-    <tr><th>ブリーフ記載</th><td>{{記載通り}}</td></tr>
-    <tr><th>追加で見るべき層</th><td>{{補足提案}}</td></tr>
+    <tr><th><span class="tag-brief">ブリーフ</span> 記載</th><td>{{記載通り}}</td></tr>
+    <tr><th><span class="tag-external">解釈</span> 追加で見るべき層</th><td>{{補足提案}}</td></tr>
   </table>
 
-  <h3>KPI / 成功指標</h3>
-  <p>{{KPI}}</p>
+  <h3>KPI / 成功指標 <span class="tag-brief">ブリーフ</span></h3>
+  <div class="from-brief">{{KPI 記載}}</div>
 
-  <h3>制約条件</h3>
-  <p>予算 / 期間 / 媒体 / 表現 / 法規 など</p>
+  <h3>制約条件 <span class="tag-brief">ブリーフ</span></h3>
+  <div class="from-brief">{{予算 / 期間 / 媒体 / 表現 / 法規 — ブリーフ記載分のみ}}</div>
 
-  <h3>違和感・疑問</h3>
+  <h3>違和感・疑問 <span class="tag-external">解釈</span></h3>
   <div class="callout tension">
     <ul>
-      <li>{{違和感 1}}</li>
+      <li>{{違和感 1 — ブリーフ記述「〇〇」に対してなぜ気になったか}}</li>
       <li>{{違和感 2}}</li>
       <li>{{違和感 3}}</li>
     </ul>
@@ -533,7 +634,10 @@
   <div class="hypothesis">
     <h4>仮説 #1: {{一文の仮説}}</h4>
     <dl>
-      <dt>根拠</dt><dd>{{出典付きで}} <sup class="cite"><a href="#src-1">1</a></sup></dd>
+      <dt>根拠 (ブリーフ)</dt>
+      <dd><span class="tag-brief">ブリーフ</span> {{ブリーフのどの記述から導いたか — 該当箇所を逐語で}}</dd>
+      <dt>根拠 (外部)</dt>
+      <dd><span class="tag-external">外部</span> {{Web / 統計 / 業界レポートからの裏付け}} <sup class="cite"><a href="#src-1">1</a></sup></dd>
       <dt>想定機会</dt><dd>{{この仮説が当たった場合に開く可能性}}</dd>
       <dt>検証方法</dt><dd>{{定量調査 / N1 インタビュー / A/B 等}}</dd>
     </dl>
@@ -542,7 +646,8 @@
   <div class="hypothesis">
     <h4>仮説 #2: {{一文の仮説}}</h4>
     <dl>
-      <dt>根拠</dt><dd>{{...}}</dd>
+      <dt>根拠 (ブリーフ)</dt><dd><span class="tag-brief">ブリーフ</span> {{...}}</dd>
+      <dt>根拠 (外部)</dt><dd><span class="tag-external">外部</span> {{...}} <sup class="cite"><a href="#src-2">2</a></sup></dd>
       <dt>想定機会</dt><dd>{{...}}</dd>
       <dt>検証方法</dt><dd>{{...}}</dd>
     </dl>
@@ -566,7 +671,11 @@
      13. SOURCES
      ============================================================ -->
 <section id="sources">
-  <h2>Sources</h2>
+  <h2>Sources <span class="tag-external">外部リサーチのみ</span></h2>
+  <p style="font-size:12px;color:var(--ink-faint);">
+    本リストは <strong>外部リサーチ由来</strong> の出典のみを記載します。<br>
+    ブリーフ記載の情報は本文中 <span class="tag-brief">ブリーフ</span> タグ・黄色枠で示しており、ここには含めません。
+  </p>
   <ol class="sources">
     <li id="src-1"><a href="{{URL}}" target="_blank">{{タイトル}}</a> — {{発表元 / 年}}</li>
     <li id="src-2"><a href="{{URL}}" target="_blank">{{タイトル}}</a> — {{発表元 / 年}}</li>
