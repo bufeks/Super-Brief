@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HYPERBOOST エージェンシーブリーフ サマリー</title>
+<style>
+  :root {
+    --bg: #0b0b0b;
+    --surface: #161616;
+    --surface-2: #1f1f1f;
+    --border: #2c2c2c;
+    --text: #f5f5f5;
+    --muted: #b3b3b3;
+    --accent: #d6ff3d;
+    --accent-2: #ff5a5f;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Helvetica Neue", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 56px 32px 96px;
+  }
+  header.hero {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 32px;
+    margin-bottom: 48px;
+  }
+  .eyebrow {
+    display: inline-block;
+    background: var(--accent);
+    color: #000;
+    padding: 4px 12px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    margin-bottom: 16px;
+  }
+  h1 {
+    font-size: 44px;
+    line-height: 1.2;
+    margin: 0 0 12px;
+    letter-spacing: -0.01em;
+  }
+  h1 .sub {
+    display: block;
+    font-size: 18px;
+    color: var(--muted);
+    font-weight: 400;
+    margin-top: 8px;
+  }
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin-top: 20px;
+    color: var(--muted);
+    font-size: 14px;
+  }
+  .meta b { color: var(--text); }
+  h2 {
+    font-size: 26px;
+    margin: 56px 0 16px;
+    padding-left: 14px;
+    border-left: 4px solid var(--accent);
+  }
+  h3 {
+    font-size: 18px;
+    margin: 28px 0 10px;
+    color: var(--accent);
+  }
+  p { margin: 10px 0; }
+  ul { padding-left: 1.2em; margin: 10px 0; }
+  li { margin: 6px 0; }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px 28px;
+    margin: 18px 0;
+  }
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  @media (max-width: 720px) {
+    .grid-2 { grid-template-columns: 1fr; }
+    h1 { font-size: 32px; }
+    .wrap { padding: 32px 18px 64px; }
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0 22px;
+    font-size: 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  th, td {
+    padding: 12px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  th {
+    background: var(--surface-2);
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  tr:last-child td { border-bottom: none; }
+  .highlight {
+    background: rgba(214,255,61,0.08);
+  }
+  .pill {
+    display: inline-block;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    margin-right: 6px;
+  }
+  .kpi {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin: 16px 0 8px;
+  }
+  .kpi div {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+  }
+  .kpi b {
+    display: block;
+    font-size: 22px;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+  .callout {
+    background: linear-gradient(135deg, rgba(214,255,61,0.12), rgba(214,255,61,0.02));
+    border: 1px solid rgba(214,255,61,0.3);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin: 20px 0;
+  }
+  .callout strong { color: var(--accent); }
+  .tldr {
+    background: var(--surface-2);
+    border-left: 4px solid var(--accent-2);
+    padding: 18px 22px;
+    border-radius: 6px;
+    margin-top: 24px;
+  }
+  footer {
+    margin-top: 64px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 13px;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <span class="eyebrow">AGENCY BRIEF SUMMARY</span>
+  <h1>HYPERBOOST エージェンシーブリーフ
+    <span class="sub">FY26 HYPERBOOST フランチャイズ／ALPEN HYPERBOOST RUN 7月キャンペーン</span>
+  </h1>
+  <div class="meta">
+    <div><b>クライアント：</b>adidas AG（日本）</div>
+    <div><b>リテーラー：</b>ALPEN</div>
+    <div><b>予算：</b>¥15M（販促＋ビジュアル制作）</div>
+    <div><b>ブリーフ発行：</b>2026年3月19日（木）</div>
+  </div>
+</header>
+
+<!-- 1 -->
+<h2>1. HYPERBOOST フランチャイズについて</h2>
+<p>レーシングシューズで培った知見を活かして開発された新ミッドソール <b>HYPERBOOST PRO FOAM</b> を中核とする新ランニングフランチャイズ。タグライン： <i>Hyper Cushioning. Hyper Energy. Hyper Light.</i></p>
+
+<div class="kpi">
+  <div><b>ENERGY</b>弾む</div>
+  <div><b>LIGHT</b>軽い</div>
+  <div><b>COMFORT</b>快適</div>
+</div>
+
+<h3>adidas ランニング ポートフォリオ内の位置づけ</h3>
+<table>
+  <thead>
+    <tr><th>フランチャイズ</th><th>ベネフィット</th><th>アイデンティティ</th><th>テクノロジー</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>ADIZERO</td><td>Light &amp; Fast</td><td>SPEED / MOTION BLUR / LIGHTNESS</td><td>LIGHTSTRIKE PRO</td></tr>
+    <tr><td>SUPERNOVA</td><td>Supportive Comfort</td><td>SOFT / WARM / PLUSH</td><td>DREAMSTRIKE</td></tr>
+    <tr class="highlight"><td><b>HYPERBOOST</b></td><td><b>Comfort Energized</b></td><td>BOUNCY / ENERGETIC / ACTIVE</td><td><b>HYPERBOOST PRO</b></td></tr>
+  </tbody>
+</table>
+<p>ポートフォリオ上の主ターゲット層は <b>エントリ／ポテンシャルランナー（20〜40代中心）</b>。ADIZEROシリーズがシリアスランナーをカバーする一方、HYPERBOOSTは "走る楽しさ" のレイヤーを担う。</p>
+
+<!-- 2 -->
+<h2>2. 対象商品</h2>
+
+<table>
+  <thead>
+    <tr><th>モデル</th><th>役割</th><th>上代</th><th>重量(27cm)</th><th>RID</th><th>PR Embargo</th><th>ALPEN発注</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>HYPERBOOST EDGE</td><td>HERO MODEL</td><td>¥24,200</td><td>255g</td><td>3/17</td><td>3/5</td><td>255</td></tr>
+    <tr><td>HYPERBOOST EDGE</td><td>HYPE DROPS</td><td>—</td><td>—</td><td>5/1</td><td>5/1</td><td>245</td></tr>
+    <tr><td>HYPERBOOST EDGE</td><td>—</td><td>—</td><td>—</td><td>7/21</td><td>7/21</td><td>14,010</td></tr>
+    <tr class="highlight"><td><b>HYPERBOOST RUN</b></td><td><b>ALPEN SMU（本案件のメイン）</b></td><td><b>¥19,800</b></td><td><b>247g</b></td><td>8/1（7/21前倒し交渉中）</td><td>7/21</td><td><b>35,813</b></td></tr>
+  </tbody>
+</table>
+
+<div class="grid-2">
+  <div class="card">
+    <h3>HYPERBOOST EDGE</h3>
+    <ul>
+      <li><b>UPPER：</b>PRIMEWEAVE UPPER × COMFORT PODS — ソフトで軽やかなウーブンアッパー＋ヒールポッドでフィット感向上</li>
+      <li><b>MIDSOLE：</b>HYPERBOOST PRO FOAM — 軽快で弾むような新感覚クッショニング</li>
+      <li><b>OUTSOLE：</b>フルレングス LIGHTTRAXION でグリップ確保</li>
+      <li>上代 ¥24,200／255g／ドロップ6mm（45/39mm）</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>HYPERBOOST RUN（本ブリーフのメイン）</h3>
+    <ul>
+      <li><b>UPPER：</b>通気ゾーン設計のエンジニアード PRIMEWEAVE＋3Dヒール構造で包み込むフィット</li>
+      <li><b>MIDSOLE：</b>日々のトレーニング／デイリーユース向けに最適化された HYPERBOOST PRO FOAM</li>
+      <li><b>OUTSOLE：</b>LIGHTTRAXION × Continentalラバー</li>
+      <li>上代 ¥19,800／247g／ドロップ6mm（38/32mm）</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 3 -->
+<h2>3. ALPEN HYPERBOOST RUN（7月キャンペーン）</h2>
+
+<h3>ターゲット</h3>
+<ul>
+  <li><b>CORE：</b>エントリーランナー（ミレニアル世代）— アクティブなライフスタイルでランニングも趣味、ハーフ／フル完走を目標。体型維持や生活習慣改善が動機。コミュニティ参加にも積極的。</li>
+  <li><b>SUB：</b>ポテンシャルランナー</li>
+  <li><b>プロダクト行動：</b>走りやすく楽に走れるシューズを探している／クッション性を重視</li>
+</ul>
+
+<div class="callout">
+  <p><strong>KEY POSITIONING：</strong> エントリランナー層にとって "<b>クッションと JOY</b>" が叶うシューズというポジションを確立。</p>
+  <p><strong>MARKETING MISSION：</strong> HYPERBOOST を通してランニングの <b>JOY</b> をポテンシャル／エントリランナーに打ち出す。</p>
+</div>
+
+<h3>WHO / WHAT / HOW</h3>
+<div class="card">
+  <p><b>OBJECTIVE：</b>エントリーランナーへの認知拡大と購買促進を図り、"最大級のクッション性と走る楽しさを提供するシューズ" として確立する。</p>
+  <p><b>STRATEGY：</b>HYPERBOOST RUN の魅力を最大化。</p>
+  <ul>
+    <li><b>WHO：</b>エントリーランナー（女性にもしっかりアプローチ）</li>
+    <li><b>WHAT：</b>アルペン限定 HYPERBOOST RUN の認知拡大・販売促進</li>
+    <li><b>HOW：</b>
+      <ul>
+        <li>Toolkit：Local Toolkit</li>
+        <li>IN-STORE：シューズを履きたくなる売り場装飾（優位置の獲得／パワーゾーン什器／FTW WALL でのプレゼンス向上）</li>
+        <li>SALES PROMOTION：トラフィック・コンバージョン促進キャンペーン</li>
+        <li>EC：LP構築</li>
+        <li>EVENT：メディア・インフルエンサーイベント</li>
+        <li>AD：デジタル広告</li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+<h3>マーケティングチャレンジ</h3>
+<div class="grid-2">
+  <div class="card">
+    <h3 style="color:var(--accent-2);margin-top:0;">CHALLENGE</h3>
+    <ul>
+      <li>価格がエントリシューズとしては高い（¥19,800）ため、付加価値が必要</li>
+      <li>EVO SL／SUPERNOVA との棲み分け</li>
+      <li>女性へのアプローチ方法</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0;">OPPORTUNITY &amp; RISK</h3>
+    <ul>
+      <li>(+) ブランドが打ち出す HYPERBOOST EDGE からのシャワー効果</li>
+      <li>(+) 日常使い・街履きにも使えるデザイン／シルエット</li>
+      <li>(+) 他社同様のソール厚に対して軽量性に優れる</li>
+      <li>(−) 夏の暑い時期でのローンチ（イベントでの熱中症対策が必須）</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card">
+  <h3 style="margin-top:0;">CONSIDERATION</h3>
+  <ul>
+    <li>9月／10月ごろにサステインフェーズを設ける（北海道マラソンを活用？）</li>
+    <li>3月のローンチ → 5月のサステイン → 7月の流れを最大化する</li>
+  </ul>
+</div>
+
+<h3>競合（HYPERBOOST COMPETITOR）</h3>
+<table>
+  <thead>
+    <tr><th>モデル</th><th>価格</th><th>重量</th><th>ポジショニング</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>ASICS NOVABLAST</td><td>¥15,000〜18,000</td><td>255g</td><td>反発性重視</td></tr>
+    <tr><td>ON CLOUDMONSTER</td><td>¥18,000〜24,000</td><td>295g</td><td>クッション性重視</td></tr>
+    <tr><td>HOKA CLIFTON</td><td>¥18,000〜22,000</td><td>278g</td><td>クッション性重視</td></tr>
+    <tr><td>NIKE PEGASUS</td><td>¥15,000〜18,000</td><td>300g（28cm）</td><td>日常使い重視</td></tr>
+    <tr><td>NEW BALANCE FRESH FOAM</td><td>¥15,000〜20,000</td><td>260g</td><td>クッション性重視</td></tr>
+    <tr class="highlight"><td><b>HYPERBOOST RUN</b></td><td><b>¥19,800</b></td><td><b>247g</b></td><td><b>クッション性重視カテゴリで最軽量</b></td></tr>
+  </tbody>
+</table>
+
+<!-- 4 -->
+<h2>4. 依頼内容（AGENCY SCRIPT）</h2>
+<div class="card">
+  <ul>
+    <li><b>CREATIVE：</b>2D MAIN KV</li>
+    <li><b>SALES PROMOTION：</b>トラフィック・コンバージョン促進を図るキャンペーン施策</li>
+    <li><b>IN-STORE：</b>シューズを履きたくなる店頭装飾提案</li>
+    <li><b>GOAL：</b>新規顧客様の獲得</li>
+  </ul>
+  <p><b>予算：</b>¥15M（販促プロモーション＋ビジュアル制作）<br>
+  <span class="pill">※店頭装飾実費は別予算・別ベンダー（提案および別ベンダーとの協業をお願い）</span></p>
+</div>
+
+<!-- 5 -->
+<h2>5. 店頭イメージ（ALPEN IN-STORE）</h2>
+<p>参考リファレンス：<b>ALPEN TOKYO</b>／<b>ALPEN FLAGSHIP STORE</b>（SS26 INCUBATION）</p>
+
+<div class="grid-2">
+  <div class="card">
+    <h3 style="margin-top:0;">可能なこと</h3>
+    <ul>
+      <li>ゲスト招聘トークショー等のイベント（使用スペースによる応相談）</li>
+      <li>開店前など消費者がいない時間帯での店内撮影（静止画・動画）</li>
+      <li>店頭を起点としたランニングセッション（集合→屋外ラン）※開店前が望ましい</li>
+      <li>応募サイト制作（アルペンオンライン内）</li>
+      <li>アクティベーション用の店頭告知物の追加掲載（オンライン告知も可）</li>
+      <li>店内モニター放映 ※ALPEN TOKYOのユニカビジョンは事前相談必要</li>
+      <li>アルペンマガジンへの販促企画掲載</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0;color:var(--accent-2);">制約事項</h3>
+    <ul>
+      <li>繁忙時間帯の店頭アクティベーションは極力避ける</li>
+      <li>アルペンスタッフ様の撮影協力・出演は基本開店前とする</li>
+    </ul>
+    <h3>その他</h3>
+    <ul>
+      <li>店頭外でのアクティベーション検討も可。前提として前後に強固な店頭誘導設計が必須。</li>
+    </ul>
+  </div>
+</div>
+
+<h3>アディダスリソース</h3>
+<div class="card">
+  <ul>
+    <li><b>ADIDAS RUNNERS TOKYO コーチ：</b>10名在籍、スケジュール調整は柔軟に対応可。</li>
+    <li><b>契約アスリート：</b>太田選手・平林選手・池田選手など（稼働可否は選手スケジュールによる）。</li>
+    <li><b>ブランディングツール貸出：</b>テント／フライングバナー／ディレクターズチェア／シューズラック。</li>
+  </ul>
+</div>
+
+<!-- 6 -->
+<h2>6. 評価基準</h2>
+<div class="card">
+  <h3 style="margin-top:0;">キャンペーン設計</h3>
+  <ul>
+    <li>目的に沿ったキャンペーン設計となっているか</li>
+    <li>7月／8月のローンチの後に、9月／10月でどうサステインするか</li>
+  </ul>
+  <h3>購買動機</h3>
+  <ul>
+    <li>HYPERBOOST RUN の商品特性を活かし、ランナーにとって購買意欲が高まるキャンペーンとなっているか</li>
+    <li>販促キャンペーンをどのように認知させ、ALPEN への訪問・購買動機につなげられるか</li>
+  </ul>
+  <h3>予算配分</h3>
+  <ul>
+    <li>予算内で効率的な予算配分ができているか</li>
+  </ul>
+</div>
+
+<!-- 7 -->
+<h2>7. スケジュール（ALPEN ROLLOUT CALENDAR）</h2>
+<table>
+  <thead>
+    <tr><th>日程</th><th>マイルストーン</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>3月5日</td><td>HYPERBOOST グローバル EMBARGO</td></tr>
+    <tr><td>3月17日</td><td>SS26 HYPERBOOST RID（DTC／ALPEN）</td></tr>
+    <tr class="highlight"><td><b>3月19日（木）</b></td><td><b>エージェンシーブリーフ</b></td></tr>
+    <tr><td>4月6日（月）〜8日（水）</td><td>エージェンシーご提案（仮）</td></tr>
+    <tr><td>4月10日（金）</td><td>エージェンシー選定（仮）</td></tr>
+    <tr><td>5月15日（金）</td><td>プラン FIX（仮）</td></tr>
+    <tr><td>5月18日（月）〜29日（金）</td><td>撮影（仮）</td></tr>
+    <tr><td>6月19日（金）</td><td>マスターデータ納品（仮）</td></tr>
+    <tr><td>6月30日（火）</td><td>入稿（仮）</td></tr>
+    <tr><td>7月21日（火）</td><td>HB EDGE EMBARGO／RID</td></tr>
+    <tr class="highlight"><td><b>8月1日＊TBC</b></td><td><b>HB RUN ALPEN SMU ローンチ</b>（7/21 前倒し交渉中）</td></tr>
+  </tbody>
+</table>
+
+<!-- TLDR -->
+<div class="tldr">
+  <h3 style="margin-top:0;">TL;DR</h3>
+  <p>adidas Japan が、アルペン限定モデル <b>HYPERBOOST RUN</b>（¥19,800／247g／2026年夏ローンチ）を、エントリー／ポテンシャルランナー — 特に女性 — に向けて立ち上げるための <b>¥15M 規模の販促＋KV＋店頭</b> 一式を競合プレゼン。プレミアム HERO の HYPERBOOST EDGE からの <b>シャワー効果</b> を活かしつつ、秋マラソンと連動する <b>9月／10月のサステイン</b> までを描き切る企画が求められる。評価軸は「キャンペーン設計の整合性」「購買動機への直結」「予算配分の効率」。</p>
+</div>
+
+<footer>
+  Source: ALPEN_HYPERBOOST_AGENCY_BRIEF_1.pdf ／ 36ページ ／ 2026年3月17日付
+</footer>
+
+</div>
+</body>
+</html>

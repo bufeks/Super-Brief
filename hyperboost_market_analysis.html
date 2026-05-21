@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HYPERBOOST RUN ／ 市場・競合ディープダイブ</title>
+<style>
+  :root {
+    --bg: #0b0b0b;
+    --surface: #161616;
+    --surface-2: #1f1f1f;
+    --border: #2c2c2c;
+    --text: #f5f5f5;
+    --muted: #b3b3b3;
+    --accent: #d6ff3d;
+    --accent-2: #ff5a5f;
+    --blue: #66a6ff;
+    --green: #6dd986;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Helvetica Neue", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 56px 32px 96px;
+  }
+  header.hero {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 32px;
+    margin-bottom: 40px;
+  }
+  .eyebrow {
+    display: inline-block;
+    background: var(--accent);
+    color: #000;
+    padding: 4px 12px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    margin-bottom: 16px;
+  }
+  h1 {
+    font-size: 44px;
+    line-height: 1.2;
+    margin: 0 0 10px;
+    letter-spacing: -0.01em;
+  }
+  h1 .sub {
+    display: block;
+    font-size: 18px;
+    color: var(--muted);
+    font-weight: 400;
+    margin-top: 8px;
+  }
+  h2 {
+    font-size: 28px;
+    margin: 56px 0 14px;
+    padding-left: 14px;
+    border-left: 4px solid var(--accent);
+  }
+  h3 {
+    font-size: 18px;
+    margin: 28px 0 10px;
+    color: var(--accent);
+  }
+  p { margin: 10px 0; }
+  ul { padding-left: 1.2em; margin: 10px 0; }
+  li { margin: 6px 0; }
+  a { color: var(--blue); }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px 28px;
+    margin: 18px 0;
+  }
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  .grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 18px;
+  }
+  .grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 14px;
+  }
+  @media (max-width: 820px) {
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    h1 { font-size: 32px; }
+    .wrap { padding: 32px 18px 64px; }
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0 22px;
+    font-size: 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  th, td {
+    padding: 12px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  th {
+    background: var(--surface-2);
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  tr:last-child td { border-bottom: none; }
+  .highlight { background: rgba(214,255,61,0.08); }
+  .pill {
+    display: inline-block;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    margin-right: 6px;
+  }
+  .kpi {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin: 18px 0 8px;
+  }
+  .kpi div {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+  }
+  .kpi b {
+    display: block;
+    font-size: 22px;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+  .kpi small { color: var(--muted); font-size: 12px; }
+
+  .callout {
+    background: linear-gradient(135deg, rgba(214,255,61,0.12), rgba(214,255,61,0.02));
+    border: 1px solid rgba(214,255,61,0.3);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin: 20px 0;
+  }
+  .callout strong { color: var(--accent); }
+  .tldr {
+    background: var(--surface-2);
+    border-left: 4px solid var(--accent-2);
+    padding: 18px 22px;
+    border-radius: 6px;
+    margin-top: 24px;
+  }
+  .swot {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 18px 0;
+  }
+  .swot div {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 20px;
+    background: var(--surface);
+  }
+  .swot h4 { margin-top:0; font-size: 13px; letter-spacing: 0.1em; }
+  .swot.s h4 { color: var(--green); }
+  .s h4 { color: var(--green); }
+  .w h4 { color: var(--accent-2); }
+  .o h4 { color: var(--accent); }
+  .t h4 { color: var(--blue); }
+  .bar {
+    height: 10px; background: var(--surface-2);
+    border-radius: 6px; overflow: hidden;
+    margin: 4px 0 10px;
+  }
+  .bar > span { display:block; height: 100%; background: var(--accent); }
+  .bar.b > span { background: var(--blue); }
+  .bar.r > span { background: var(--accent-2); }
+  .bar.g > span { background: var(--green); }
+  .legend { font-size: 12px; color: var(--muted); }
+  footer {
+    margin-top: 64px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 12px;
+  }
+  footer ol { padding-left: 1.2em; }
+  footer li { margin: 4px 0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <span class="eyebrow">MARKET &amp; COMPETITOR DEEP-DIVE</span>
+  <h1>HYPERBOOST RUN ／ 日本市場・競合ディープダイブ
+    <span class="sub">FY26 ALPEN HYPERBOOST RUN ピッチ補足資料 — エージェンシーブリーフを超えて</span>
+  </h1>
+  <div style="color:var(--muted);font-size:14px;margin-top:14px;">
+    本ドキュメントはブリーフ要約の補足として、日本ランニング市場のマクロ動向、競合の最新スペック・ポジショニング、ターゲットセグメントの解像度、アルペンの戦略文脈、HYPERBOOST RUNが取るべき差別化を整理したものです。
+  </div>
+</header>
+
+<!-- TL;DR -->
+<div class="tldr">
+  <h3 style="margin-top:0;">エグゼクティブサマリー</h3>
+  <ul>
+    <li>日本ランニングシューズ市場は <b>4,200億円（'25）→ 6,600億円（'34、CAGR 4.96%）</b> と中期成長軌道。世界でも有数の "プレミアム化" 進行マーケット。</li>
+    <li>箱根駅伝 2026 で <b>アディダスは2年連続シェア1位（35.7%）</b>。エリート領域での強さを、エントリー層への "シャワー効果" として活用できる絶好機。</li>
+    <li>女性ランニング人口は20年で最少水準（&lt;200万人）に縮小する一方、 <b>K-カルチャー連動の "ファッション・ランニング"</b> が若年女性層で台頭。HYPERBOOST RUNの "Joy" 設計とフィットする数少ない潮流。</li>
+    <li>競合のクッション帯は <b>255〜300g</b>。<b>247gのHYPERBOOST RUNはカテゴリ最軽量</b>。"最大クッション × 最軽量 × アルペン限定" の三重差別化が勝ち筋。</li>
+    <li>アルペンは2026年4月に <b>ALPEN RUN MEIJI PARK</b> をオープン。社員1000人マラソン、年間300日ランイベント等、"運営側がランナー" の流通アセットは独自KOLとして使い倒すべき。</li>
+  </ul>
+</div>
+
+<!-- 1. Market sizing -->
+<h2>1. 日本ランニング市場のマクロ動向</h2>
+
+<div class="kpi">
+  <div><b>4,200億円</b><small>2025 日本市場規模 [1]</small></div>
+  <div><b>+4.96%</b><small>CAGR ('25-'34) [1]</small></div>
+  <div><b>758万人</b><small>ジョギング・ランニング推計実施人口（2024）[2]</small></div>
+  <div><b>335,852人</b><small>2024年マラソン完走者（過去最高）[3]</small></div>
+</div>
+
+<h3>4つの潮流（FashionSnap整理）</h3>
+<div class="grid-2">
+  <div class="card">
+    <h3 style="margin-top:0;">① 中距離&チーム形式の台頭</h3>
+    <ul>
+      <li>ハーフマラソン参加率 <b>62%</b>（前年 +3pt）</li>
+      <li>5〜10km中距離 +2pt、駅伝・リレマラソン +1pt</li>
+      <li>"完走ハードル × 仲間で楽しめる" カテゴリが伸長 [1]</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0;">② コミュニティ／クルー文化</h3>
+    <ul>
+      <li>グループラン参加が急増、各社が "商品ではなく場" を売る方向に</li>
+      <li>ユニクロ「ランクラブ」、ノースフェイス × タイクーンランニング、サロモン東京マラソン Expo 初出展などの動き [1][4]</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0;">③ ライフスタイル／街履き化</h3>
+    <ul>
+      <li>ランニングシューズが日常スニーカーカテゴリに浸透</li>
+      <li>円安・インバウンド需要も後押し。日本は "世界で最も活発な消費市場" 化 [4]</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0;">④ 新フォーマット／新興ブランド</h3>
+    <ul>
+      <li>HYROX 大阪大会（'26年1月）に <b>8,000人超</b>参加</li>
+      <li>サティスファイ（仏）、トラックスミス（米）等の "カルチャー系" 新興が日本参入 [1]</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 2. Hakone share -->
+<h2>2. ブランドパワー指標：箱根駅伝 2026 着用率</h2>
+<p>エリート領域の着用率はマス層への "後光" として最も強いブランド資産。<b>アディダスは2年連続首位</b>でナイキ時代から完全に勢力図を塗り替えた。HYPERBOOSTのローンチは、この絶頂期に展開される。</p>
+
+<table>
+  <thead>
+    <tr><th>順位</th><th>ブランド</th><th>着用者</th><th>シェア</th><th>主要モデル</th></tr>
+  </thead>
+  <tbody>
+    <tr class="highlight"><td>1</td><td><b>adidas</b></td><td>75人</td><td>35.7%</td><td>ADIZERO ADIOS PRO EVO 1 / EVO 2（¥82,500・138g）</td></tr>
+    <tr><td>2</td><td>ASICS</td><td>60人</td><td>28.5%</td><td>METASPEED SKY/EDGE PARIS（EKIDEN Pack）</td></tr>
+    <tr><td>3</td><td>Nike</td><td>35人</td><td>16.6%</td><td>Vaporfly 4 / Alphafly 3（'21年95.7% → 大幅後退）</td></tr>
+    <tr><td>4</td><td>Puma</td><td>31人</td><td>14.7%</td><td>DEVIATE NITRO ELITE 3</td></tr>
+  </tbody>
+</table>
+<p style="color:var(--muted);font-size:13px;">上位4ブランドで <b>95.7%</b> の集中（[5][6]）。アディダスは青学・國學院との関係も追い風。</p>
+
+<div class="bar"><span style="width:35.7%"></span></div>
+<div class="legend">adidas 35.7%</div>
+<div class="bar b"><span style="width:28.5%"></span></div>
+<div class="legend">ASICS 28.5%</div>
+<div class="bar r"><span style="width:16.6%"></span></div>
+<div class="legend">Nike 16.6%</div>
+<div class="bar g"><span style="width:14.7%"></span></div>
+<div class="legend">Puma 14.7%</div>
+
+<div class="callout">
+  <strong>インサイト：</strong>
+  ブリーフでは "ブランドが打ち出す HYPERBOOST EDGE からのシャワー効果" を機会と位置付けているが、市場文脈では <b>EDGEの "シャワー" は箱根トップシェアの上に乗っかる二重後光</b>。エントリーランナーが "走り始めるなら勝っているブランドの靴" を選ぶ心理を、KVコピー・店頭POP・LP冒頭で明示すべき。
+</div>
+
+<!-- 3. Consumer segment -->
+<h2>3. ターゲットセグメントの解像度</h2>
+
+<h3>エントリーランナー全体像</h3>
+<div class="grid-3">
+  <div class="card">
+    <h3 style="margin-top:0;">人口</h3>
+    <ul>
+      <li>男性 564万人／女性 175万人（'24）[2]</li>
+      <li>男性40〜50代は実施率増加、全体は前年比微減 [2]</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0;">動機</h3>
+    <ul>
+      <li>体型維持、生活習慣改善（健康文脈）</li>
+      <li>マラソン完走をゴール設定、コミュニティ加入で継続</li>
+      <li>"楽に走れて長く続くシューズ" を探索 [ブリーフ]</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0;">行動</h3>
+    <ul>
+      <li>クッション性を最重視（特に膝・腰の不安）</li>
+      <li>ハーフマラソン／リレマラソン参加が成長軸</li>
+      <li>"走る靴" を街でも履きたい [1][4]</li>
+    </ul>
+  </div>
+</div>
+
+<h3>女性層 — "縮小"と"再点火"の二重構造</h3>
+<div class="card">
+  <ul>
+    <li><b>逆風：</b>女性ランニング人口は <b>1998年の調査開始以来初めて200万人を下回り</b>、20年で最低水準（笹川スポーツ財団）[2]。</li>
+    <li><b>追い風：</b>20代女性中心に <b>K-カルチャー × ファッション × ランニング</b> の若年層クルー文化が拡大。<b>文化服装学院ランニング部 × 080TOKYO</b> 等の事例が象徴 [1]。</li>
+    <li><b>含意：</b>HYPERBOOST RUNが狙うべき女性層は "競技完走志向のマス" ではなく、 <b>"スタイルの一部としてラン" を始めた都市生活者</b>。コミュニティ・SNS・撮りたくなる店頭装飾が必須。</li>
+  </ul>
+</div>
+
+<div class="callout">
+  <strong>提案ハイポセシス：</strong>
+  KV／コピーは "走る人" ではなく <b>"走り始める人 × 街に溶けるスニーカー"</b> の文脈で構築。アルペンのウーマンズ専用 FTW WALL を作り、HOKA／NB 1080 から乗り換える層をピンポイントで奪う。
+</div>
+
+<!-- 4. Competitive deep-dive -->
+<h2>4. 競合ディープダイブ（2026年版アップデート）</h2>
+<p>ブリーフ掲載スペックを最新レビューで補正。<b>HYPERBOOST RUN（¥19,800／247g）はクッションカテゴリの全競合より軽量</b>、価格は中位レンジに収まる。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>モデル</th>
+      <th>価格帯</th>
+      <th>重量</th>
+      <th>スタック高</th>
+      <th>特徴／2026版でのアップデート</th>
+      <th>USP</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="highlight">
+      <td><b>adidas HYPERBOOST RUN</b></td>
+      <td>¥19,800</td>
+      <td><b>247g</b></td>
+      <td>38/32mm</td>
+      <td>HYPERBOOST PRO FOAM デイリー版／PRIMEWEAVE 3Dヒール／LIGHTTRAXION × Continental</td>
+      <td><b>カテゴリ最軽量 × 弾むクッション</b></td>
+    </tr>
+    <tr>
+      <td>ASICS Novablast 5</td>
+      <td>¥15,000-18,000<br>($140)</td>
+      <td>255g</td>
+      <td>—</td>
+      <td>FF BLAST MAX を <b>100% POE化</b>（EVAフリー）。+8.5% バウンス。"2026 ベストバリュー・デイリートレーナー" 評価 [7]</td>
+      <td>反発・コスパ</td>
+    </tr>
+    <tr>
+      <td>On Cloudmonster 2</td>
+      <td>¥18,000-24,000</td>
+      <td>~295g</td>
+      <td>—</td>
+      <td>デュアルデンシティ Helion + Speedboard。CloudTec ポッド継承。アッパー92%リサイクルポリエステル [8]</td>
+      <td>デザイン／街映え</td>
+    </tr>
+    <tr>
+      <td>HOKA Clifton 10</td>
+      <td>¥18,000-22,000<br>($150)</td>
+      <td>278g</td>
+      <td><b>44.4mm</b>（前作32.7→大幅増）</td>
+      <td>厚底化加速、Bondi寄りに。一方で旧EVAフォーム継続で "重く反発鈍い" 評 [9]</td>
+      <td>最大級クッション</td>
+    </tr>
+    <tr>
+      <td>Nike Pegasus 41</td>
+      <td>¥16,500（女性¥13,999）</td>
+      <td>~300g（28cm）</td>
+      <td>—</td>
+      <td>ReactX フォーム + デュアル Zoom Air。"トラスト" 系の定番デイリー [10]</td>
+      <td>定番安心感／価格訴求</td>
+    </tr>
+    <tr>
+      <td>NB Fresh Foam X 1080 v14</td>
+      <td>¥15,000-20,000</td>
+      <td>~260g（v14は増量）</td>
+      <td>40mm踵</td>
+      <td>プラッシュ系の代表。前作より重量増・トゥボックスのテーパード化が指摘 [11]</td>
+      <td>柔・耐久・幅広</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>ポジショニングマップ（軽量 × クッション量）</h3>
+<div class="card" style="background:#0f0f0f;">
+  <pre style="color:var(--muted);font-family:'Menlo','Courier New',monospace;font-size:12px;line-height:1.5;overflow-x:auto;">
+クッション高 ▲
+            │           HOKA Clifton 10 (278g, 44mm)
+            │
+            │                 NB 1080 v14 (260g, 40mm)        ON Cloudmonster 2 (~295g)
+            │
+            │        ★HYPERBOOST RUN (247g, 38mm)
+            │
+            │                 ASICS Novablast 5 (255g)
+            │
+            │                                                   Nike Pegasus 41 (~300g)
+            └──────────────────────────────────────────► 重量（軽い → 重い）
+                ★ = 最軽量 × 高クッションのスイートスポット占有可能
+  </pre>
+</div>
+
+<!-- 5. Internal portfolio -->
+<h2>5. 自社ポートフォリオ内の棲み分け</h2>
+<p>ブリーフが課題視する <b>「EVO SL／SUPERNOVAとの棲み分け」</b> をマトリクス化。</p>
+<table>
+  <thead>
+    <tr><th>モデル</th><th>カテゴリ</th><th>主要ベネフィット</th><th>ペルソナ</th><th>価格帯</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>ADIZERO EVO SL</td><td>Light &amp; Fast</td><td>軽量・スピードの入口</td><td>サブ4目指す中級／街履きスピード好き</td><td>¥18,700</td></tr>
+    <tr><td>SUPERNOVA RISE / SOLUTION</td><td>Supportive Comfort</td><td>サポート・安定／初心者の安心</td><td>初フル準備層／オーバープロネーター</td><td>¥17,600-19,800</td></tr>
+    <tr class="highlight"><td><b>HYPERBOOST RUN</b></td><td><b>Comfort Energized</b></td><td><b>クッション × Joy × 軽さ</b></td><td><b>"楽しく走り始めたい" 女性・若年層</b></td><td><b>¥19,800</b></td></tr>
+    <tr><td>HYPERBOOST EDGE</td><td>Hero / Premium</td><td>弾む × 最大クッション</td><td>本格化志向・コアファン・スニーカーマニア</td><td>¥24,200</td></tr>
+  </tbody>
+</table>
+
+<div class="callout">
+  <strong>棲み分けの言語化案：</strong><br>
+  ・EVO SL = <b>速く軽く走る</b><br>
+  ・SUPERNOVA = <b>安心して走り続ける</b><br>
+  ・<b>HYPERBOOST RUN = 走るのが楽しくなる</b><br>
+  ・HYPERBOOST EDGE = <b>限界まで弾む</b>
+</div>
+
+<!-- 6. Retail / Alpen -->
+<h2>6. アルペンの戦略文脈 — "走るブランド" としての流通アセット</h2>
+<div class="grid-2">
+  <div class="card">
+    <h3 style="margin-top:0;">ALPEN RUN MEIJI PARK（2026年4月24日オープン）</h3>
+    <ul>
+      <li>国立競技場隣接・明治公園内のランニング特化店</li>
+      <li>テーマ：「つどう、知る、つなぐ」</li>
+      <li>シューズレンタル、初心者〜上級者まで対応</li>
+      <li>都市型スパ <b>TOTOPA</b> と連携、ラン後の動線</li>
+      <li>年間 <b>300日</b>のランイベント、週5回開催 [12]</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0;">アルペン 1000プロジェクト</h3>
+    <ul>
+      <li>全従業員3,000人のうち <b>1,000人がフルマラソン完走</b>目標</li>
+      <li>既に <b>850人以上が完走済</b>（2026年4月時点）</li>
+      <li>水野敦之社長自ら東京マラソン完走（5:33:01）／月間走行距離100〜120kmへ拡大 [12]</li>
+    </ul>
+  </div>
+</div>
+
+<div class="callout">
+  <strong>提案：</strong>
+  アルペン社員自体を <b>"プロダクトを履いて走るインフルエンサー"</b> として組成。HYPERBOOST RUN着用の "ALPEN STAFF RUN CLUB" を9-10月サステインで露出展開。EDGEに頼らない、アルペン限定SMUならではのアセットになる。
+</div>
+
+<h3>競合リテーラー／ブランドハウスの動き</h3>
+<div class="card">
+  <ul>
+    <li><b>ユニクロ：</b>「ランクラブ」テーマのカプセル + モーニングランで "服 × コミュニティ" を提案 [1]</li>
+    <li><b>ノースフェイス：</b>カルチャー系クルー <b>タイクーンランニング</b>と協業 [1]</li>
+    <li><b>サロモン：</b>東京マラソンEXPO初出展で日本本格参入を宣言 [1]</li>
+    <li><b>プーマ：</b>合宿地長野・菅平に <b>"Puma Running House"</b> リカバリー施設常設、エリート → 一般への接続 [4]</li>
+  </ul>
+  <p style="color:var(--muted);font-size:13px;">→ "場の提供" 競争は激化中。アルペン × アディダスの "Meiji Park flagship" × "Hyperboost Run" は対抗カードとして極めて強い。</p>
+</div>
+
+<!-- 7. SWOT -->
+<h2>7. HYPERBOOST RUN ／ SWOT</h2>
+<div class="swot">
+  <div class="s">
+    <h4>STRENGTH</h4>
+    <ul>
+      <li>箱根駅伝シェア1位ブランドの後光</li>
+      <li>EDGEからの新フォーム継承で説得力ある "弾む × 軽い"</li>
+      <li>247gはクッション帯で実質最軽量</li>
+      <li>3Dヒール構造でフィット感を物語化可能</li>
+    </ul>
+  </div>
+  <div class="w">
+    <h4>WEAKNESS</h4>
+    <ul>
+      <li>¥19,800は Novablast/Pegasus/NB1080 廉価帯より高い</li>
+      <li>HYPERBOOSTは新フランチャイズ＝ブランド認知ゼロから</li>
+      <li>EDGE が "プレミアム枠" を取った直後で価値の二段階構築が必要</li>
+      <li>女性向けデザイン／カラー展開の訴求は未定</li>
+    </ul>
+  </div>
+  <div class="o">
+    <h4>OPPORTUNITY</h4>
+    <ul>
+      <li>K-カルチャー連動 若年女性クルー文化が拡大中</li>
+      <li>ハーフマラソン参加が成長軸（+3pt）</li>
+      <li>アルペン明治公園 flagship との合流タイミング</li>
+      <li>HOKA Clifton 10 の重量増／NB 1080 の重量増は乗り換え好機</li>
+      <li>9-10月の北海道マラソン／秋大会群でのサステイン</li>
+    </ul>
+  </div>
+  <div class="t">
+    <h4>THREAT</h4>
+    <ul>
+      <li>Novablast 5 が "ベストバリュー" 評で同価格帯に刺さる</li>
+      <li>On / HOKA の街履き訴求が女性層に浸透</li>
+      <li>ユニクロ等の "場×服" 統合プレイの加速</li>
+      <li>夏ローンチの暑熱／イベントオペレーション負荷</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 8. Strategic recos -->
+<h2>8. 戦略的レコメンデーション（ピッチ用フック候補）</h2>
+
+<div class="grid-2">
+  <div class="card">
+    <h3 style="margin-top:0;">A. メッセージング</h3>
+    <ul>
+      <li>"<b>軽くて、弾んで、続けたくなる。</b>" / "<b>JOY in every step.</b>"</li>
+      <li>"<b>クッション帯、最軽量級。</b>"（247g 訴求）</li>
+      <li>EDGE = 限界 ／ RUN = 日常 の文脈分離コピー</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0;">B. 女性アプローチ</h3>
+    <ul>
+      <li>080TOKYO 的 K-カルチャークルーとの共創</li>
+      <li>"街でも履ける" スタイリングカット — ファッション誌タイアップ</li>
+      <li>アルペン明治公園 flagship でのウィメンズ専用 Fitting Night</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0;">C. リテール／店頭</h3>
+    <ul>
+      <li>FTW WALL × HYPERBOOST 3兄弟（EDGE / EDGE2 / RUN）の階層ストーリー</li>
+      <li>247g を体感する "片足比較" インタラクティブ什器</li>
+      <li>アルペン社員 RUN CLUB の声を店頭タグに</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0;">D. サステインフェーズ（9-10月）</h3>
+    <ul>
+      <li>北海道マラソン（8月末）→ 直後の "完走者の声" UGC収集</li>
+      <li>金沢マラソン（10月）／大阪マラソン（2月）導線</li>
+      <li>HYROX大阪（年明け）への露出ブリッジ</li>
+    </ul>
+  </div>
+</div>
+
+<div class="callout">
+  <strong>勝ち筋の一文：</strong>
+  「HYPERBOOST RUNは、<b>箱根No.1ブランドが、街と毎日のランをつなぐために作った、最軽量級クッションシューズ</b>。アルペン明治公園を拠点にした<b>"走り始める都市生活者"</b>の物語を、夏ローンチ → 秋サステイン → 年明けマラソンまで一本のストーリーで通す。」
+</div>
+
+<footer>
+  <h3>参照ソース</h3>
+  <ol>
+    <li><a href="https://www.fashionsnap.com/article/running-market-2026/">FashionSnap：東京マラソン直前！ 4つの潮流で読み解く、国内ランニング市場の今（2026）</a></li>
+    <li><a href="https://www.ssf.or.jp/thinktank/sports_life/data/jogging_running.html">笹川スポーツ財団：ジョギング・ランニング推計実施人口（2024）</a></li>
+    <li><a href="https://runnet.jp/smp/topics/report/250612.html">RUNNET：全日本マラソンランキング 2024</a></li>
+    <li><a href="https://senken.co.jp/posts/sneakers-biz-260226">繊研新聞：日本はランニングシューズの消費大国に（2026/02）</a></li>
+    <li><a href="https://www.nikkei.com/article/DGXZQOUF030B60T00C26A1000000/">日本経済新聞：箱根駅伝シューズ着用率、アディダスが連覇</a></li>
+    <li><a href="https://store.alpen-group.jp/Page/Feature/running_260109_01.aspx">Alpen Group Magazine：シューズから見た2026年箱根駅伝（総評版）</a></li>
+    <li><a href="https://runrepeat.com/asics-novablast-5">RunRepeat：ASICS Novablast 5 Review (2026)</a></li>
+    <li><a href="https://runrepeat.com/on-cloudmonster-2">RunRepeat：On Cloudmonster 2 Review</a></li>
+    <li><a href="https://runrepeat.com/hoka-clifton-10">RunRepeat：Hoka Clifton 10 Review (2025)</a></li>
+    <li><a href="https://www.nike.com/jp/en/w/pegasus-shoes-8nexhzy7ok">Nike Japan：Pegasus 41 製品ページ</a></li>
+    <li><a href="https://runrepeat.com/new-balance-fresh-foam-x-1080-v-14">RunRepeat：New Balance Fresh Foam X 1080 v14</a></li>
+    <li><a href="https://runnet.jp/smp/topics/report/260423_2.html">RUNNET：ALPEN RUN MEIJI PARK オープン（2026/04/23）</a></li>
+    <li><a href="https://runrepeat.com/adidas-hyperboost-edge">RunRepeat：Adidas Hyperboost Edge Review (2026)</a></li>
+    <li><a href="https://www.doctorsofrunning.com/2026/03/adidas-hyperboost-edge-review-2026.html">Doctors of Running：Adidas Hyperboost Edge Review</a></li>
+  </ol>
+  <p>本資料はオープンソース情報のみを参照し、外部公表数値・レビューを編集したものです。最新の社内売上・実販データはアルペン／adidas Japan へご確認ください。</p>
+</footer>
+
+</div>
+</body>
+</html>
