@@ -318,20 +318,34 @@
     margin-right: 6px;
   }
 
-  /* ----- sources / citations ----- */
-  sup.cite {
+  /* ----- inline sources ----- */
+  /* Small source note placed right after the cited statement.
+     Used inline within a sentence or at the end of a paragraph. */
+  .src-inline {
     font-size: 11px;
-    color: var(--accent);
-    margin-left: 2px;
+    color: var(--ink-faint);
+    margin-left: 4px;
+    white-space: normal;
   }
-  sup.cite a { color: inherit; text-decoration: none; }
-  ol.sources {
-    font-size: 13px;
+  .src-inline::before { content: "— "; }
+  .src-inline a {
     color: var(--ink-soft);
-    padding-left: 1.4em;
+    text-decoration: underline;
+    text-decoration-color: var(--rule);
+    word-break: break-word;
   }
-  ol.sources li { margin: 6px 0; word-break: break-all; }
-  ol.sources a { color: var(--ink); }
+  .src-inline a:hover { text-decoration-color: var(--ink-soft); }
+
+  /* Block-level source note placed under a paragraph or quote. */
+  .src-line {
+    display: block;
+    font-size: 11px;
+    color: var(--ink-faint);
+    margin-top: 4px;
+    padding-left: 12px;
+    border-left: 2px solid var(--rule);
+  }
+  .src-line a { color: var(--ink-soft); }
 
   hr { border: none; border-top: 1px solid var(--rule); margin: 32px 0; }
 
@@ -371,7 +385,7 @@
   </dl>
   <div class="provenance-legend">
     <span><span class="swatch brief"></span>ブリーフ由来 (クライアント記載)</span>
-    <span><span class="swatch external"></span>外部リサーチ由来 (Web / 統計 / 業界レポート — 末尾 Sources 参照)</span>
+    <span><span class="swatch external"></span>外部リサーチ由来 (Web / 統計 / 業界レポート — 出典は各引用箇所に小さく添えてあります)</span>
   </div>
 </header>
 
@@ -393,8 +407,10 @@
     <li><a href="#tension">領域横断テンション</a></li>
     <li><a href="#hypothesis">仮説の種</a></li>
     <li><a href="#open">未解決の問い</a></li>
-    <li><a href="#sources">Sources</a></li>
   </ol>
+  <p style="font-size:11px;color:var(--ink-faint);margin:12px 0 0;">
+    出典は引用箇所のすぐ後ろに小さく表記しています (— 発表元 / 年 / URL)。
+  </p>
 </nav>
 
 <!-- ============================================================
@@ -460,7 +476,10 @@
   <h3>直接競合の主要キャンペーン (直近 24 ヶ月)</h3>
   <table>
     <tr><th>競合</th><th>キャンペーン</th><th>キーメッセージ</th><th>時期</th><th>出典</th></tr>
-    <tr><td>{{社名}}</td><td>{{キャンペーン名}}</td><td>{{訴求}}</td><td>{{YYYY-MM}}</td><td><sup class="cite"><a href="#src-1">1</a></sup></td></tr>
+    <tr>
+      <td>{{社名}}</td><td>{{キャンペーン名}}</td><td>{{訴求}}</td><td>{{YYYY-MM}}</td>
+      <td style="font-size:12px;"><a href="{{URL}}" target="_blank">{{発表元}}</a> ({{年}})</td>
+    </tr>
   </table>
 
   <h3>ポジショニング比較</h3>
@@ -481,7 +500,10 @@
   <h2>3. 市場・カテゴリー</h2>
 
   <h3>市場規模と成長率</h3>
-  <p>{{直近データ ― 発表元 / 年}} <sup class="cite"><a href="#src-2">2</a></sup></p>
+  <p>
+    {{市場規模・成長率の本文 — 数値含む}}
+    <span class="src-inline"><a href="{{URL}}" target="_blank">{{発表元 / レポート名}}</a> ({{年}})</span>
+  </p>
 
   <h3>構造変化</h3>
   <p>{{EC化、価格帯シフト、ユーザー層変化}}</p>
@@ -501,7 +523,10 @@
   <h2>4. 社会の空気 (Zeitgeist)</h2>
 
   <h3>価値観の潮流</h3>
-  <p>{{調査からの引用 ― 発表元 / 年}}</p>
+  <p>
+    {{調査結果の本文}}
+    <span class="src-inline"><a href="{{URL}}" target="_blank">{{発表元 / 調査名}}</a> ({{年}})</span>
+  </p>
 
   <h3>関連するバズ / 流行語</h3>
   <p>{{直近 6〜12 ヶ月のキーワード}}</p>
@@ -598,9 +623,15 @@
 
   <div class="callout risk">
     <ul>
-      <li>{{過去の炎上事例 (出典付き)}}</li>
-      <li>{{規制リスク}}</li>
-      <li>{{ブランドセーフティ}}</li>
+      <li>
+        {{過去の炎上事例の要旨}}
+        <span class="src-inline"><a href="{{URL}}" target="_blank">{{報道元}}</a> ({{YYYY-MM}})</span>
+      </li>
+      <li>
+        {{規制リスクの要旨}}
+        <span class="src-inline"><a href="{{URL}}" target="_blank">{{規制の根拠条文 / 公式ガイドライン}}</a></span>
+      </li>
+      <li>{{ブランドセーフティ — 出典が必要なら同上記法}}</li>
       <li>{{競合被り}}</li>
     </ul>
   </div>
@@ -637,7 +668,10 @@
       <dt>根拠 (ブリーフ)</dt>
       <dd><span class="tag-brief">ブリーフ</span> {{ブリーフのどの記述から導いたか — 該当箇所を逐語で}}</dd>
       <dt>根拠 (外部)</dt>
-      <dd><span class="tag-external">外部</span> {{Web / 統計 / 業界レポートからの裏付け}} <sup class="cite"><a href="#src-1">1</a></sup></dd>
+      <dd>
+        <span class="tag-external">外部</span> {{Web / 統計 / 業界レポートからの裏付け}}
+        <span class="src-inline"><a href="{{URL}}" target="_blank">{{発表元}}</a> ({{年}})</span>
+      </dd>
       <dt>想定機会</dt><dd>{{この仮説が当たった場合に開く可能性}}</dd>
       <dt>検証方法</dt><dd>{{定量調査 / N1 インタビュー / A/B 等}}</dd>
     </dl>
@@ -647,7 +681,11 @@
     <h4>仮説 #2: {{一文の仮説}}</h4>
     <dl>
       <dt>根拠 (ブリーフ)</dt><dd><span class="tag-brief">ブリーフ</span> {{...}}</dd>
-      <dt>根拠 (外部)</dt><dd><span class="tag-external">外部</span> {{...}} <sup class="cite"><a href="#src-2">2</a></sup></dd>
+      <dt>根拠 (外部)</dt>
+      <dd>
+        <span class="tag-external">外部</span> {{...}}
+        <span class="src-inline"><a href="{{URL}}" target="_blank">{{発表元}}</a> ({{年}})</span>
+      </dd>
       <dt>想定機会</dt><dd>{{...}}</dd>
       <dt>検証方法</dt><dd>{{...}}</dd>
     </dl>
@@ -667,24 +705,10 @@
   </ul>
 </section>
 
-<!-- ============================================================
-     13. SOURCES
-     ============================================================ -->
-<section id="sources">
-  <h2>Sources <span class="tag-external">外部リサーチのみ</span></h2>
-  <p style="font-size:12px;color:var(--ink-faint);">
-    本リストは <strong>外部リサーチ由来</strong> の出典のみを記載します。<br>
-    ブリーフ記載の情報は本文中 <span class="tag-brief">ブリーフ</span> タグ・黄色枠で示しており、ここには含めません。
-  </p>
-  <ol class="sources">
-    <li id="src-1"><a href="{{URL}}" target="_blank">{{タイトル}}</a> — {{発表元 / 年}}</li>
-    <li id="src-2"><a href="{{URL}}" target="_blank">{{タイトル}}</a> — {{発表元 / 年}}</li>
-  </ol>
-</section>
-
 <hr>
 <p style="font-size:12px;color:var(--ink-faint);text-align:center;">
-  Generated by Super-Brief — リサーチに特化した広告ブリーフ・リサーチャー
+  Generated by Super-Brief — リサーチに特化した広告ブリーフ・リサーチャー<br>
+  ※ 出典は引用箇所のすぐ後ろに小さく表記しています。
 </p>
 
 </main>
