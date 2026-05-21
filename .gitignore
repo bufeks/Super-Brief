@@ -1,0 +1,16 @@
+# Generated reports — do NOT commit (contains client-specific research).
+# Share by sending the HTML file directly to the project team.
+reports/*.html
+!reports/.gitkeep
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Editor / OS
+.DS_Store
+*.swp
+.idea/
+.vscode/
