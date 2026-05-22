@@ -203,6 +203,51 @@ KPI/成功指標:
 
 ---
 
+## Step 5.5: Creative Brief 確定 (★必須)
+
+`templates/framework.md` の「領域 0」に定義された **22 項目** を全部埋める。
+これが HTML レポート最上段の「セクション 0」として配置される、**プランナーが最初に見るもの**。
+
+### 必須 22 項目 (左カラム: ブランド軸 10 + 右カラム: ターゲット・実装 12)
+
+```
+[ブランド軸]
+1.  Brand Name
+2.  Brand Philosophy / Purpose
+3.  Brand Slogan
+4.  Brand Promise
+5.  Business Goal
+6.  Ad Role
+7.  Problem
+8.  Competitor
+9.  Unique Selling Proposition
+10. Fact
+
+[ターゲット・実装]
+11. Target
+12. Target Insight
+13. Social Insight
+14. Before Perception
+15. After Perception
+16. Tone & Manner
+17. Campaign Concept
+18. Campaign Tagline       ※ プランナー領域 → 方向性のみ
+19. Key Visual             ※ クリエイティブ領域 → 方向性のみ
+20. Catch Copy             ※ コピーライター領域 → 方向性のみ
+```
+
+### 充足ルール
+
+- 各セルは 1〜3 行で簡潔に記入
+- 各セル内で出所を区別:
+  - ブリーフ記載 → `.from-brief` 黄色枠 or `<span class="tag-brief">ブリーフ</span>` インライン
+  - 外部リサーチ → 通常文 + `<span class="src-inline">` で発表元・年・URL を引用直後に添える
+  - 解釈 → `<span class="tag-external">解釈</span>` タグ付き
+- ブリーフからも外部からも確定できない場合は `[要確認]` と書き、Step 7 の「未解決の問い」に追加
+- 18〜20 (Tagline / Key Visual / Catch Copy) は別チームの仕事なので、**完成形を絶対に書かない**。方向性のヒントまで。
+
+---
+
 ## Step 6: HTML レポート生成
 
 `templates/report.html` を参考に、**単一の HTML ファイル** を以下のパスに書き出す:
@@ -247,6 +292,8 @@ reports/<YYYYMMDD>-<クライアントスラッグ>-<案件名スラッグ>.html
 レポートを書き終えた後、**自分で再度開いて以下をチェック**:
 
 - [ ] CLAUDE.md の品質基準を満たすか
+- [ ] **Creative Brief 22 項目** がレポート最上段に配置され、全項目記入されているか (不明は `[要確認]`)
+- [ ] Creative Brief の 18〜20 (Tagline / Key Visual / Catch Copy) は方向性のみで完成形を書いていないか
 - [ ] **ブリーフ由来 / 外部由来 / 解釈 の 3 区分が視覚的に区別** されているか (黄色枠 / 通常 + 番号引用 / 解釈タグ)
 - [ ] ブリーフ由来と外部由来が **1 文の中で混ざっていない** か
 - [ ] 外部出典が **引用箇所のすぐ後ろ** に小さく添えられているか (下部 Sources セクションは作っていないか)

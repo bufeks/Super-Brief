@@ -318,6 +318,75 @@
     margin-right: 6px;
   }
 
+  /* ----- Creative Brief grid ----- */
+  .creative-brief {
+    border: 2px solid var(--ink);
+    border-radius: 10px;
+    padding: 28px 32px;
+    margin: 24px 0 40px;
+    background: linear-gradient(180deg, #fafaf2 0%, var(--paper) 100%);
+  }
+  .creative-brief h2 {
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 0 6px !important;
+    font-size: 24px !important;
+  }
+  .creative-brief .lede {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin: 0 0 24px;
+  }
+  .cb-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px 36px;
+  }
+  .cb-column h3 {
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0 0 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .cb-list { margin: 0; }
+  .cb-list dt {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.06em;
+    margin-top: 14px;
+    text-transform: uppercase;
+  }
+  .cb-list dt:first-child { margin-top: 0; }
+  .cb-list dt .cb-jp {
+    color: var(--ink-soft);
+    font-weight: 500;
+    text-transform: none;
+    font-size: 11px;
+    letter-spacing: 0;
+    margin-left: 6px;
+  }
+  .cb-list dd {
+    margin: 4px 0 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+  .cb-list dd.empty {
+    color: var(--ink-faint);
+    font-style: italic;
+  }
+  @media (max-width: 720px) {
+    .cb-grid { grid-template-columns: 1fr; }
+    .creative-brief { padding: 20px; }
+  }
+  @media print {
+    .creative-brief { break-inside: avoid-page; }
+  }
+
   /* ----- inline sources ----- */
   /* Small source note placed right after the cited statement.
      Used inline within a sentence or at the end of a paragraph. */
@@ -395,6 +464,7 @@
 <nav class="toc">
   <h2>Contents</h2>
   <ol>
+    <li><a href="#creative-brief"><strong>Creative Brief (22 項目 / 戦略の核)</strong></a></li>
     <li><a href="#decode">ブリーフ・デコード</a></li>
     <li><a href="#competitor">競合状況</a></li>
     <li><a href="#market">市場・カテゴリー</a></li>
@@ -412,6 +482,96 @@
     出典は引用箇所のすぐ後ろに小さく表記しています (— 発表元 / 年 / URL)。
   </p>
 </nav>
+
+<!-- ============================================================
+     0. CREATIVE BRIEF (22項目 — 戦略の核 / Mandatory first section)
+     ============================================================ -->
+<section id="creative-brief" class="creative-brief">
+  <h2>0. Creative Brief — 戦略の核</h2>
+  <p class="lede">
+    広告プランニングの土台となる 22 項目。<strong>ここを見れば全体像が掴める</strong>設計。
+    各セル内では <span class="tag-brief">ブリーフ</span>(黄)・通常表示+<span class="src-inline" style="margin-left:0"><a href="#">出典</a> (年)</span>(外部)・<span class="tag-external">解釈</span>(青) で出所を区別。
+    ブリーフからも外部からも確定できない欄は <em>[要確認]</em> と明示し、本文末尾「未解決の問い」に連動。
+  </p>
+
+  <div class="cb-grid">
+    <!-- 左カラム: ブランド軸 -->
+    <div class="cb-column">
+      <h3>ブランド軸</h3>
+      <dl class="cb-list">
+        <dt>Brand Name <span class="cb-jp">ブランドの名前</span></dt>
+        <dd>{{...}}</dd>
+
+        <dt>Brand Philosophy / Purpose <span class="cb-jp">ブランドの哲学 / 社会的役割</span></dt>
+        <dd>{{...}}</dd>
+
+        <dt>Brand Slogan <span class="cb-jp">ブランドの宣誓</span></dt>
+        <dd>{{...}}</dd>
+
+        <dt>Brand Promise <span class="cb-jp">ブランドが生活者に約束すること</span></dt>
+        <dd>{{...}}</dd>
+
+        <dt>Business Goal <span class="cb-jp">ビジネスとして目指すゴールイメージ</span></dt>
+        <dd>{{...}}</dd>
+
+        <dt>Ad Role <span class="cb-jp">ビジネスゴールを叶えるために広告が果たす役割</span></dt>
+        <dd>{{...}}</dd>
+
+        <dt>Problem <span class="cb-jp">商品の抱える課題</span></dt>
+        <dd>{{...}}</dd>
+
+        <dt>Competitor <span class="cb-jp">競合商品</span></dt>
+        <dd>{{...}}</dd>
+
+        <dt>Unique Selling Proposition <span class="cb-jp">唯一無二の提案 / 競合優位点</span></dt>
+        <dd>{{...}}</dd>
+
+        <dt>Fact <span class="cb-jp">USP を裏付ける事実</span></dt>
+        <dd>{{...}}</dd>
+      </dl>
+    </div>
+
+    <!-- 右カラム: ターゲット・実装 -->
+    <div class="cb-column">
+      <h3>ターゲット・実装</h3>
+      <dl class="cb-list">
+        <dt>Target <span class="cb-jp">ターゲット</span></dt>
+        <dd>{{...}}</dd>
+
+        <dt>Target Insight <span class="cb-jp">ターゲットの潜在的欲求</span></dt>
+        <dd>{{...}}</dd>
+
+        <dt>Social Insight <span class="cb-jp">社会環境 / 社会的な潜在的欲求・課題</span></dt>
+        <dd>{{...}}</dd>
+
+        <dt>Before Perception <span class="cb-jp">現状のブランドへの認識</span></dt>
+        <dd>{{...}}</dd>
+
+        <dt>After Perception <span class="cb-jp">作りたい新たな認識</span></dt>
+        <dd>{{...}}</dd>
+
+        <dt>Tone &amp; Manner <span class="cb-jp">守るべきブランドのトーン (地雷含む)</span></dt>
+        <dd>{{...}}</dd>
+
+        <dt>Campaign Concept <span class="cb-jp">キャンペーンのテーマ</span></dt>
+        <dd>{{...}}</dd>
+
+        <dt>Campaign Tagline <span class="cb-jp">キャンペーンをまとめるコピー</span></dt>
+        <dd class="empty">[要確認] — 別チーム (プランナー) が策定。リサーチ段階では空欄。</dd>
+
+        <dt>Key Visual <span class="cb-jp">象徴となるアイコン</span></dt>
+        <dd class="empty">[要確認] — 別チーム (クリエイティブ) が策定。リサーチ段階では方向性のみ。</dd>
+
+        <dt>Catch Copy <span class="cb-jp">アテンションを獲得するための投げかけ</span></dt>
+        <dd class="empty">[要確認] — 別チーム (コピーライター) が策定。</dd>
+      </dl>
+    </div>
+  </div>
+
+  <p style="font-size:12px;color:var(--ink-faint);margin:20px 0 0;text-align:center;">
+    断片的に語られがちな広告戦略要素を、相互関係を整理して初めて役に立つ形に統合した 22 項目フレーム。
+  </p>
+</section>
 
 <!-- ============================================================
      1. DECODE

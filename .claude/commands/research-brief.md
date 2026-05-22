@@ -24,8 +24,14 @@ description: 添付ブリーフを Super-Brief リサーチフローで解析し
    - 競合 / 市場 / 社会の空気 / 生活者 / カルチャー / リスク を分担
    - 各エージェントには現案件のブリーフ抽出テキストだけを渡す (他案件の情報禁止)
 8. **Step 5 (統合)**: 横断テンション・矛盾・So What を抽出、仮説の種を 3〜5 個
-9. **Step 6 (HTML 生成)**: `reports/<YYYYMMDD>-<クライアントスラッグ>-<案件スラッグ>.html` に書き出し
+9. **Step 5.5 (Creative Brief 確定)** ★必須:
+   - `templates/framework.md` の「領域 0」に定義された **22 項目** を全部埋める
+   - ブリーフ + リサーチ + 統合から各セルに 1〜3 行で記入
+   - 不明なセルは `[要確認]` と書き、Step 7 の「未解決の問い」に連動
+   - **広告プランチーム領域 (Campaign Tagline / Key Visual / Catch Copy) は方向性のみ・完成形は書かない**
+10. **Step 6 (HTML 生成)**: `reports/<YYYYMMDD>-<クライアントスラッグ>-<案件スラッグ>.html` に書き出し
    - `templates/report.html` の構造と CSS を踏襲
+   - **セクション 0 (Creative Brief) を必ず最上段に配置** — TOC でも先頭にリンク
    - **ブリーフ由来は `.from-brief` / `tag-brief` で視覚的に区別**
    - **外部リサーチ出典は引用箇所のすぐ後ろに `.src-inline` で小さく添える** (末尾 Sources セクションは作らない)
 10. **Step 7 (自己レビュー)**: 品質基準 8 項目をチェック → 不足を補正
