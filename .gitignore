@@ -1,0 +1,32 @@
+# =========================================================
+# Super-Brief is a CONFIG-ONLY repository.
+# Briefs (input) and reports (output) must NEVER be committed.
+# Share artifacts by sending files directly, not via git.
+# =========================================================
+
+# Generated reports
+reports/*.html
+!reports/.gitkeep
+
+# Brief inputs — keep these OUTSIDE the repo (e.g. /tmp or a
+# personal folder). These patterns are a safety net only.
+*.pdf
+*.pptx
+*.docx
+briefs/
+inputs/
+examples/
+extracted/
+*.extracted.txt
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Editor / OS
+.DS_Store
+*.swp
+.idea/
+.vscode/

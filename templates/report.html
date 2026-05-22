@@ -1,0 +1,876 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Super-Brief Research Report — {{案件名}}</title>
+<style>
+  /* ==============================================================
+     Super-Brief Report — Single-file HTML, no external dependencies.
+     Replace this template's placeholders with real content for each
+     brief. Keep <style> as-is so the look stays consistent.
+     ============================================================== */
+
+  :root {
+    --bg: #fafaf7;
+    --paper: #ffffff;
+    --ink: #1a1a1a;
+    --ink-soft: #555;
+    --ink-faint: #888;
+    --accent: #d2412a;       /* alert / tension */
+    --accent-soft: #fbe5e0;
+    --rule: #e5e2d8;
+    --tag-bg: #eee9dc;
+    --quote-bg: #f5f1e6;
+    --code-bg: #f0ece0;
+    --max: 920px;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+                 "Yu Gothic", "Meiryo", "Segoe UI", "Noto Sans JP", sans-serif;
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: 0.01em;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  main {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 64px 48px 96px;
+    background: var(--paper);
+    min-height: 100vh;
+    box-shadow: 0 0 60px rgba(0,0,0,0.04);
+  }
+
+  /* ----- header ----- */
+  header.cover {
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 32px;
+    margin-bottom: 48px;
+  }
+  header.cover .eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0 0 12px;
+  }
+  header.cover h1 {
+    font-size: 34px;
+    line-height: 1.3;
+    margin: 0 0 16px;
+    font-weight: 700;
+  }
+  header.cover .meta {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 6px 16px;
+    font-size: 14px;
+    color: var(--ink-soft);
+  }
+  header.cover .meta dt { font-weight: 600; color: var(--ink); }
+  header.cover .meta dd { margin: 0; }
+
+  /* ----- section ----- */
+  section { margin: 56px 0; scroll-margin-top: 24px; }
+  section > h2 {
+    font-size: 22px;
+    border-left: 6px solid var(--ink);
+    padding-left: 14px;
+    margin: 0 0 24px;
+    line-height: 1.3;
+  }
+  section > h3 {
+    font-size: 17px;
+    margin: 32px 0 12px;
+    color: var(--ink);
+  }
+  section.tension > h2 { border-left-color: var(--accent); color: var(--accent); }
+
+  /* ----- TOC ----- */
+  nav.toc {
+    background: var(--tag-bg);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 48px;
+  }
+  nav.toc h2 {
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin: 0 0 12px;
+    color: var(--ink-soft);
+  }
+  nav.toc ol {
+    margin: 0;
+    padding-left: 1.4em;
+    columns: 2;
+    column-gap: 32px;
+    font-size: 14px;
+  }
+  nav.toc a { color: var(--ink); text-decoration: none; }
+  nav.toc a:hover { text-decoration: underline; }
+
+  /* ----- source provenance: BRIEF vs EXTERNAL ----- */
+  /* Brief-derived content (what the client wrote in the brief) */
+  .from-brief {
+    background: #fff8e1;
+    border-left: 4px solid #c9a227;
+    padding: 12px 16px;
+    margin: 12px 0;
+    border-radius: 0 6px 6px 0;
+  }
+  .from-brief::before {
+    content: "📋 ブリーフ記載";
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    font-weight: 700;
+    color: #8a6d10;
+    margin-bottom: 6px;
+  }
+  /* Inline brief tag — for short references mid-paragraph */
+  .tag-brief {
+    display: inline-block;
+    background: #fff3c4;
+    color: #8a6d10;
+    font-size: 11px;
+    padding: 1px 7px;
+    border-radius: 3px;
+    margin-right: 4px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    vertical-align: 1px;
+  }
+  /* Inline external tag — companion to tag-brief for clarity in mixed paragraphs */
+  .tag-external {
+    display: inline-block;
+    background: #e6eff7;
+    color: #1f4f7a;
+    font-size: 11px;
+    padding: 1px 7px;
+    border-radius: 3px;
+    margin-right: 4px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    vertical-align: 1px;
+  }
+  /* Verbatim quotes from the brief */
+  blockquote.brief-quote {
+    background: #fffaea;
+    border-left: 3px solid #c9a227;
+    padding: 10px 14px;
+    margin: 10px 0;
+    font-size: 14px;
+    color: #5a4710;
+    font-style: italic;
+    border-radius: 0 6px 6px 0;
+  }
+  blockquote.brief-quote::before {
+    content: "ブリーフ原文より";
+    display: block;
+    font-style: normal;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    font-weight: 700;
+    color: #8a6d10;
+    margin-bottom: 4px;
+  }
+  /* Legend used in the cover area */
+  .provenance-legend {
+    display: flex;
+    gap: 14px;
+    margin-top: 14px;
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+  .provenance-legend .swatch {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    margin-right: 6px;
+    vertical-align: 1px;
+  }
+  .provenance-legend .swatch.brief { background: #c9a227; }
+  .provenance-legend .swatch.external { background: #1f4f7a; }
+
+  /* ----- callouts ----- */
+  .callout {
+    border-left: 4px solid var(--ink);
+    background: #fafaf2;
+    padding: 14px 18px;
+    margin: 16px 0;
+    border-radius: 0 6px 6px 0;
+  }
+  .callout.sowhat {
+    border-left-color: #2a7d2e;
+    background: #eef6ef;
+  }
+  .callout.sowhat::before {
+    content: "So What";
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    font-weight: 700;
+    color: #2a7d2e;
+    margin-bottom: 4px;
+  }
+  .callout.tension {
+    border-left-color: var(--accent);
+    background: var(--accent-soft);
+  }
+  .callout.tension::before {
+    content: "Tension";
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+  .callout.risk {
+    border-left-color: #b35900;
+    background: #fdf4e7;
+  }
+  .callout.risk::before {
+    content: "Risk";
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    font-weight: 700;
+    color: #b35900;
+    margin-bottom: 4px;
+  }
+
+  /* ----- quote (N1 voices) ----- */
+  blockquote.voice {
+    background: var(--quote-bg);
+    border-left: 3px solid var(--ink-faint);
+    padding: 12px 16px;
+    margin: 12px 0;
+    font-size: 14px;
+    color: var(--ink-soft);
+    border-radius: 0 6px 6px 0;
+  }
+  blockquote.voice .src {
+    display: block;
+    margin-top: 6px;
+    font-size: 11px;
+    color: var(--ink-faint);
+  }
+
+  /* ----- hypothesis cards ----- */
+  .hypothesis {
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin: 16px 0;
+    background: #fdfcf6;
+  }
+  .hypothesis h4 {
+    margin: 0 0 10px;
+    font-size: 16px;
+  }
+  .hypothesis dl {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 4px 16px;
+    margin: 0;
+    font-size: 14px;
+  }
+  .hypothesis dt {
+    font-weight: 700;
+    color: var(--ink-soft);
+    letter-spacing: 0.05em;
+  }
+  .hypothesis dd { margin: 0; }
+
+  /* ----- tables ----- */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin: 12px 0;
+  }
+  th, td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  th { background: var(--tag-bg); font-weight: 700; }
+
+  /* ----- tags ----- */
+  .tag {
+    display: inline-block;
+    background: var(--tag-bg);
+    color: var(--ink-soft);
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 12px;
+    margin-right: 6px;
+  }
+
+  /* ----- Creative Brief grid ----- */
+  .creative-brief {
+    border: 2px solid var(--ink);
+    border-radius: 10px;
+    padding: 28px 32px;
+    margin: 24px 0 40px;
+    background: linear-gradient(180deg, #fafaf2 0%, var(--paper) 100%);
+  }
+  .creative-brief h2 {
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 0 6px !important;
+    font-size: 24px !important;
+  }
+  .creative-brief .lede {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin: 0 0 24px;
+  }
+  .cb-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px 36px;
+  }
+  .cb-column h3 {
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0 0 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .cb-list { margin: 0; }
+  .cb-list dt {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.06em;
+    margin-top: 14px;
+    text-transform: uppercase;
+  }
+  .cb-list dt:first-child { margin-top: 0; }
+  .cb-list dt .cb-jp {
+    color: var(--ink-soft);
+    font-weight: 500;
+    text-transform: none;
+    font-size: 11px;
+    letter-spacing: 0;
+    margin-left: 6px;
+  }
+  .cb-list dd {
+    margin: 4px 0 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+  .cb-list dd.empty {
+    color: var(--ink-faint);
+    font-style: italic;
+  }
+  @media (max-width: 720px) {
+    .cb-grid { grid-template-columns: 1fr; }
+    .creative-brief { padding: 20px; }
+  }
+  @media print {
+    .creative-brief { break-inside: avoid-page; }
+  }
+
+  /* ----- inline sources ----- */
+  /* Small source note placed right after the cited statement.
+     Used inline within a sentence or at the end of a paragraph. */
+  .src-inline {
+    font-size: 11px;
+    color: var(--ink-faint);
+    margin-left: 4px;
+    white-space: normal;
+  }
+  .src-inline::before { content: "— "; }
+  .src-inline a {
+    color: var(--ink-soft);
+    text-decoration: underline;
+    text-decoration-color: var(--rule);
+    word-break: break-word;
+  }
+  .src-inline a:hover { text-decoration-color: var(--ink-soft); }
+
+  /* Block-level source note placed under a paragraph or quote. */
+  .src-line {
+    display: block;
+    font-size: 11px;
+    color: var(--ink-faint);
+    margin-top: 4px;
+    padding-left: 12px;
+    border-left: 2px solid var(--rule);
+  }
+  .src-line a { color: var(--ink-soft); }
+
+  hr { border: none; border-top: 1px solid var(--rule); margin: 32px 0; }
+
+  /* ----- print ----- */
+  @media print {
+    body { background: white; }
+    main { box-shadow: none; padding: 24px; max-width: none; }
+    nav.toc { break-after: page; }
+    section { break-inside: avoid; }
+    .hypothesis, .callout, blockquote.voice { break-inside: avoid; }
+    a { color: var(--ink); }
+  }
+
+  /* ----- responsive ----- */
+  @media (max-width: 640px) {
+    main { padding: 32px 20px 64px; }
+    header.cover h1 { font-size: 26px; }
+    nav.toc ol { columns: 1; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ============================================================
+     COVER  (replace placeholders for each report)
+     ============================================================ -->
+<header class="cover">
+  <p class="eyebrow">Super-Brief Research Report</p>
+  <h1>{{案件名 / プロジェクト名}}</h1>
+  <dl class="meta">
+    <dt>クライアント</dt><dd>{{クライアント名 / 業種}}</dd>
+    <dt>カテゴリー</dt><dd>{{カテゴリー}}</dd>
+    <dt>発行日</dt><dd>{{YYYY-MM-DD}}</dd>
+    <dt>担当リサーチャー</dt><dd>Super-Brief (Claude Code)</dd>
+    <dt>カバー領域</dt><dd>{{選択した 10 領域のうちの一覧}}</dd>
+  </dl>
+  <div class="provenance-legend">
+    <span><span class="swatch brief"></span>ブリーフ由来 (クライアント記載)</span>
+    <span><span class="swatch external"></span>外部リサーチ由来 (Web / 統計 / 業界レポート — 出典は各引用箇所に小さく添えてあります)</span>
+  </div>
+</header>
+
+<!-- ============================================================
+     TABLE OF CONTENTS
+     ============================================================ -->
+<nav class="toc">
+  <h2>Contents</h2>
+  <ol>
+    <li><a href="#creative-brief"><strong>Creative Brief (22 項目 / 戦略の核)</strong></a></li>
+    <li><a href="#decode">ブリーフ・デコード</a></li>
+    <li><a href="#competitor">競合状況</a></li>
+    <li><a href="#market">市場・カテゴリー</a></li>
+    <li><a href="#zeitgeist">社会の空気</a></li>
+    <li><a href="#consumer">生活者インサイト</a></li>
+    <li><a href="#brand">ブランド現在地</a></li>
+    <li><a href="#culture">カルチャー文脈</a></li>
+    <li><a href="#whitespace">機会領域 (White Space)</a></li>
+    <li><a href="#risk">リスク・地雷</a></li>
+    <li><a href="#tension">領域横断テンション</a></li>
+    <li><a href="#hypothesis">仮説の種</a></li>
+    <li><a href="#open">未解決の問い</a></li>
+  </ol>
+  <p style="font-size:11px;color:var(--ink-faint);margin:12px 0 0;">
+    出典は引用箇所のすぐ後ろに小さく表記しています (— 発表元 / 年 / URL)。
+  </p>
+</nav>
+
+<!-- ============================================================
+     0. CREATIVE BRIEF (22項目 — 戦略の核 / Mandatory first section)
+     ============================================================ -->
+<section id="creative-brief" class="creative-brief">
+  <h2>0. Creative Brief — 戦略の核</h2>
+  <p class="lede">
+    広告プランニングの土台となる 22 項目。<strong>ここを見れば全体像が掴める</strong>設計。
+    各セル内では <span class="tag-brief">ブリーフ</span>(黄)・通常表示+<span class="src-inline" style="margin-left:0"><a href="#">出典</a> (年)</span>(外部)・<span class="tag-external">解釈</span>(青) で出所を区別。
+    ブリーフからも外部からも確定できない欄は <em>[要確認]</em> と明示し、本文末尾「未解決の問い」に連動。
+  </p>
+
+  <div class="cb-grid">
+    <!-- 左カラム: ブランド軸 -->
+    <div class="cb-column">
+      <h3>ブランド軸</h3>
+      <dl class="cb-list">
+        <dt>Brand Name <span class="cb-jp">ブランドの名前</span></dt>
+        <dd>{{...}}</dd>
+
+        <dt>Brand Philosophy / Purpose <span class="cb-jp">ブランドの哲学 / 社会的役割</span></dt>
+        <dd>{{...}}</dd>
+
+        <dt>Brand Slogan <span class="cb-jp">ブランドの宣誓</span></dt>
+        <dd>{{...}}</dd>
+
+        <dt>Brand Promise <span class="cb-jp">ブランドが生活者に約束すること</span></dt>
+        <dd>{{...}}</dd>
+
+        <dt>Business Goal <span class="cb-jp">ビジネスとして目指すゴールイメージ</span></dt>
+        <dd>{{...}}</dd>
+
+        <dt>Ad Role <span class="cb-jp">ビジネスゴールを叶えるために広告が果たす役割</span></dt>
+        <dd>{{...}}</dd>
+
+        <dt>Problem <span class="cb-jp">商品の抱える課題</span></dt>
+        <dd>{{...}}</dd>
+
+        <dt>Competitor <span class="cb-jp">競合商品</span></dt>
+        <dd>{{...}}</dd>
+
+        <dt>Unique Selling Proposition <span class="cb-jp">唯一無二の提案 / 競合優位点</span></dt>
+        <dd>{{...}}</dd>
+
+        <dt>Fact <span class="cb-jp">USP を裏付ける事実</span></dt>
+        <dd>{{...}}</dd>
+      </dl>
+    </div>
+
+    <!-- 右カラム: ターゲット・実装 -->
+    <div class="cb-column">
+      <h3>ターゲット・実装</h3>
+      <dl class="cb-list">
+        <dt>Target <span class="cb-jp">ターゲット</span></dt>
+        <dd>{{...}}</dd>
+
+        <dt>Target Insight <span class="cb-jp">ターゲットの潜在的欲求</span></dt>
+        <dd>{{...}}</dd>
+
+        <dt>Social Insight <span class="cb-jp">社会環境 / 社会的な潜在的欲求・課題</span></dt>
+        <dd>{{...}}</dd>
+
+        <dt>Before Perception <span class="cb-jp">現状のブランドへの認識</span></dt>
+        <dd>{{...}}</dd>
+
+        <dt>After Perception <span class="cb-jp">作りたい新たな認識</span></dt>
+        <dd>{{...}}</dd>
+
+        <dt>Tone &amp; Manner <span class="cb-jp">守るべきブランドのトーン (地雷含む)</span></dt>
+        <dd>{{...}}</dd>
+
+        <dt>Campaign Concept <span class="cb-jp">キャンペーンのテーマ</span></dt>
+        <dd>{{...}}</dd>
+
+        <dt>Campaign Tagline <span class="cb-jp">キャンペーンをまとめるコピー</span></dt>
+        <dd class="empty">[要確認] — 別チーム (プランナー) が策定。リサーチ段階では空欄。</dd>
+
+        <dt>Key Visual <span class="cb-jp">象徴となるアイコン</span></dt>
+        <dd class="empty">[要確認] — 別チーム (クリエイティブ) が策定。リサーチ段階では方向性のみ。</dd>
+
+        <dt>Catch Copy <span class="cb-jp">アテンションを獲得するための投げかけ</span></dt>
+        <dd class="empty">[要確認] — 別チーム (コピーライター) が策定。</dd>
+      </dl>
+    </div>
+  </div>
+
+  <p style="font-size:12px;color:var(--ink-faint);margin:20px 0 0;text-align:center;">
+    断片的に語られがちな広告戦略要素を、相互関係を整理して初めて役に立つ形に統合した 22 項目フレーム。
+  </p>
+</section>
+
+<!-- ============================================================
+     1. DECODE
+     ============================================================ -->
+<section id="decode">
+  <h2>1. ブリーフ・デコード</h2>
+  <p style="font-size:13px;color:var(--ink-soft);">
+    このセクションは <strong>ブリーフ記載 (黄)</strong> と <strong>リサーチャー解釈</strong> を分けて表記します。
+  </p>
+
+  <h3>ブリーフ原文の主要記述</h3>
+  <blockquote class="brief-quote">
+    {{ブリーフから直接引用 — 課題 / 背景 / ターゲット / 媒体指定など中核部分を逐語で}}
+  </blockquote>
+
+  <h3>表層課題</h3>
+  <div class="from-brief">
+    {{ブリーフに書かれた課題を一文で}}
+  </div>
+
+  <h3>推測される真因 <span class="tag-external">解釈</span></h3>
+  <p style="font-size:12px;color:var(--ink-faint);margin-top:-6px;">
+    ※ 以下はブリーフを読んだ上でのリサーチャー仮説。ブリーフに書かれた事実とは区別。
+  </p>
+  <ul>
+    <li>{{真因仮説 1}}</li>
+    <li>{{真因仮説 2}}</li>
+  </ul>
+
+  <h3>ターゲット定義</h3>
+  <table>
+    <tr><th><span class="tag-brief">ブリーフ</span> 記載</th><td>{{記載通り}}</td></tr>
+    <tr><th><span class="tag-external">解釈</span> 追加で見るべき層</th><td>{{補足提案}}</td></tr>
+  </table>
+
+  <h3>KPI / 成功指標 <span class="tag-brief">ブリーフ</span></h3>
+  <div class="from-brief">{{KPI 記載}}</div>
+
+  <h3>制約条件 <span class="tag-brief">ブリーフ</span></h3>
+  <div class="from-brief">{{予算 / 期間 / 媒体 / 表現 / 法規 — ブリーフ記載分のみ}}</div>
+
+  <h3>違和感・疑問 <span class="tag-external">解釈</span></h3>
+  <div class="callout tension">
+    <ul>
+      <li>{{違和感 1 — ブリーフ記述「〇〇」に対してなぜ気になったか}}</li>
+      <li>{{違和感 2}}</li>
+      <li>{{違和感 3}}</li>
+    </ul>
+  </div>
+
+  <div class="callout sowhat">
+    <p>{{So What ― このセクションから言える 1〜3 行の含意}}</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     2. COMPETITOR
+     ============================================================ -->
+<section id="competitor">
+  <h2>2. 競合状況</h2>
+
+  <h3>直接競合の主要キャンペーン (直近 24 ヶ月)</h3>
+  <table>
+    <tr><th>競合</th><th>キャンペーン</th><th>キーメッセージ</th><th>時期</th><th>出典</th></tr>
+    <tr>
+      <td>{{社名}}</td><td>{{キャンペーン名}}</td><td>{{訴求}}</td><td>{{YYYY-MM}}</td>
+      <td style="font-size:12px;"><a href="{{URL}}" target="_blank">{{発表元}}</a> ({{年}})</td>
+    </tr>
+  </table>
+
+  <h3>ポジショニング比較</h3>
+  <p>{{4象限マップや表で記述}}</p>
+
+  <h3>新興・越境競合</h3>
+  <p>{{D2C、海外勢、隣接カテゴリー}}</p>
+
+  <div class="callout sowhat">
+    <p>{{So What}}</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     3. MARKET
+     ============================================================ -->
+<section id="market">
+  <h2>3. 市場・カテゴリー</h2>
+
+  <h3>市場規模と成長率</h3>
+  <p>
+    {{市場規模・成長率の本文 — 数値含む}}
+    <span class="src-inline"><a href="{{URL}}" target="_blank">{{発表元 / レポート名}}</a> ({{年}})</span>
+  </p>
+
+  <h3>構造変化</h3>
+  <p>{{EC化、価格帯シフト、ユーザー層変化}}</p>
+
+  <h3>規制動向</h3>
+  <p>{{該当する規制}}</p>
+
+  <div class="callout sowhat">
+    <p>{{So What}}</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     4. ZEITGEIST
+     ============================================================ -->
+<section id="zeitgeist">
+  <h2>4. 社会の空気 (Zeitgeist)</h2>
+
+  <h3>価値観の潮流</h3>
+  <p>
+    {{調査結果の本文}}
+    <span class="src-inline"><a href="{{URL}}" target="_blank">{{発表元 / 調査名}}</a> ({{年}})</span>
+  </p>
+
+  <h3>関連するバズ / 流行語</h3>
+  <p>{{直近 6〜12 ヶ月のキーワード}}</p>
+
+  <div class="callout sowhat">
+    <p>{{So What}}</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     5. CONSUMER INSIGHT
+     ============================================================ -->
+<section id="consumer">
+  <h2>5. 生活者インサイト</h2>
+
+  <h3>N1 の声 (SNS / レビュー要旨)</h3>
+  <blockquote class="voice">
+    {{要旨引用 (個人特定情報は除く)}}
+    <span class="src">— {{プラットフォーム}} / {{YYYY-MM}}</span>
+  </blockquote>
+
+  <h3>Job to be done / Tension</h3>
+  <div class="callout tension">
+    {{期待と現実のズレ}}
+  </div>
+
+  <h3>購買意思決定要因</h3>
+  <p>{{価格 / 機能 / レビュー / 口コミ等の重みづけ}}</p>
+
+  <div class="callout sowhat">
+    <p>{{So What}}</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     6. BRAND  (該当する場合のみ)
+     ============================================================ -->
+<section id="brand">
+  <h2>6. ブランド現在地</h2>
+
+  <h3>過去キャンペーン棚卸し</h3>
+  <p>{{直近 3〜5 年の主要キャンペーンとその変遷}}</p>
+
+  <h3>想起されている価値・トーン</h3>
+  <p>{{「〇〇と言えば」のスロット}}</p>
+
+  <h3>直近の評判</h3>
+  <p>{{好意 / 否定の傾向}}</p>
+
+  <div class="callout sowhat">
+    <p>{{So What}}</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     7. CULTURE
+     ============================================================ -->
+<section id="culture">
+  <h2>7. カルチャー文脈</h2>
+
+  <h3>関連サブカルチャー / コミュニティ</h3>
+  <p>{{記述}}</p>
+
+  <h3>影響力者 / メディア生態系</h3>
+  <p>{{KOL、Podcast、Newsletter 等}}</p>
+
+  <div class="callout sowhat">
+    <p>{{So What}}</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     8. WHITE SPACE
+     ============================================================ -->
+<section id="whitespace">
+  <h2>8. 機会領域 (White Space)</h2>
+
+  <ul>
+    <li>{{未充足ニーズ}}</li>
+    <li>{{隣接カテゴリー越境}}</li>
+    <li>{{利用シーン拡張}}</li>
+  </ul>
+
+  <div class="callout sowhat">
+    <p>{{So What}}</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     9. RISK
+     ============================================================ -->
+<section id="risk">
+  <h2>9. リスク・地雷</h2>
+
+  <div class="callout risk">
+    <ul>
+      <li>
+        {{過去の炎上事例の要旨}}
+        <span class="src-inline"><a href="{{URL}}" target="_blank">{{報道元}}</a> ({{YYYY-MM}})</span>
+      </li>
+      <li>
+        {{規制リスクの要旨}}
+        <span class="src-inline"><a href="{{URL}}" target="_blank">{{規制の根拠条文 / 公式ガイドライン}}</a></span>
+      </li>
+      <li>{{ブランドセーフティ — 出典が必要なら同上記法}}</li>
+      <li>{{競合被り}}</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============================================================
+     10. CROSS-DOMAIN TENSION
+     ============================================================ -->
+<section id="tension" class="tension">
+  <h2>10. 領域横断テンション</h2>
+  <p>市場・競合・社会・生活者を横断したときに浮かぶ <strong>矛盾</strong> と <strong>違和感</strong>。プランニングの出発点になる発見。</p>
+
+  <div class="callout tension">
+    <strong>{{テンション 1 のタイトル}}</strong>
+    <p>{{記述 ― 例: 市場は伸びているが SNS は冷めている}}</p>
+  </div>
+
+  <div class="callout tension">
+    <strong>{{テンション 2 のタイトル}}</strong>
+    <p>{{記述}}</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     11. HYPOTHESIS SEEDS
+     ============================================================ -->
+<section id="hypothesis">
+  <h2>11. 仮説の種 (プランナーへの引き継ぎカード)</h2>
+  <p><em>※ これは結論ではなく、プランニング・チームが次に動ける問いの形にしたもの。広告プランは別チームの仕事。</em></p>
+
+  <div class="hypothesis">
+    <h4>仮説 #1: {{一文の仮説}}</h4>
+    <dl>
+      <dt>根拠 (ブリーフ)</dt>
+      <dd><span class="tag-brief">ブリーフ</span> {{ブリーフのどの記述から導いたか — 該当箇所を逐語で}}</dd>
+      <dt>根拠 (外部)</dt>
+      <dd>
+        <span class="tag-external">外部</span> {{Web / 統計 / 業界レポートからの裏付け}}
+        <span class="src-inline"><a href="{{URL}}" target="_blank">{{発表元}}</a> ({{年}})</span>
+      </dd>
+      <dt>想定機会</dt><dd>{{この仮説が当たった場合に開く可能性}}</dd>
+      <dt>検証方法</dt><dd>{{定量調査 / N1 インタビュー / A/B 等}}</dd>
+    </dl>
+  </div>
+
+  <div class="hypothesis">
+    <h4>仮説 #2: {{一文の仮説}}</h4>
+    <dl>
+      <dt>根拠 (ブリーフ)</dt><dd><span class="tag-brief">ブリーフ</span> {{...}}</dd>
+      <dt>根拠 (外部)</dt>
+      <dd>
+        <span class="tag-external">外部</span> {{...}}
+        <span class="src-inline"><a href="{{URL}}" target="_blank">{{発表元}}</a> ({{年}})</span>
+      </dd>
+      <dt>想定機会</dt><dd>{{...}}</dd>
+      <dt>検証方法</dt><dd>{{...}}</dd>
+    </dl>
+  </div>
+</section>
+
+<!-- ============================================================
+     12. OPEN QUESTIONS
+     ============================================================ -->
+<section id="open">
+  <h2>12. 未解決の問い</h2>
+  <p>追加調査やクライアント確認が必要な論点。</p>
+  <ul>
+    <li>{{問い 1}}</li>
+    <li>{{問い 2}}</li>
+    <li>{{問い 3}}</li>
+  </ul>
+</section>
+
+<hr>
+<p style="font-size:12px;color:var(--ink-faint);text-align:center;">
+  Generated by Super-Brief — リサーチに特化した広告ブリーフ・リサーチャー<br>
+  ※ 出典は引用箇所のすぐ後ろに小さく表記しています。
+</p>
+
+</main>
+</body>
+</html>
