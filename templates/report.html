@@ -464,22 +464,19 @@
 <nav class="toc">
   <h2>Contents</h2>
   <ol>
-    <li><a href="#creative-brief"><strong>Creative Brief (22 項目 / 戦略の核)</strong></a></li>
-    <li><a href="#decode">ブリーフ・デコード</a></li>
-    <li><a href="#competitor">競合状況</a></li>
-    <li><a href="#market">市場・カテゴリー</a></li>
-    <li><a href="#zeitgeist">社会の空気</a></li>
-    <li><a href="#consumer">生活者インサイト</a></li>
-    <li><a href="#brand">ブランド現在地</a></li>
-    <li><a href="#culture">カルチャー文脈</a></li>
-    <li><a href="#whitespace">機会領域 (White Space)</a></li>
-    <li><a href="#risk">リスク・地雷</a></li>
-    <li><a href="#tension">領域横断テンション</a></li>
-    <li><a href="#hypothesis">仮説の種</a></li>
-    <li><a href="#open">未解決の問い</a></li>
+    <li><a href="#creative-brief"><strong>0. Creative Brief (22 項目 / 戦略の核)</strong></a></li>
+    <li><a href="#summary">1. 要約 (30 秒で読む全体像)</a></li>
+    <li><a href="#tension-issues">2. 矛盾・課題 (チームで議論)</a></li>
+    <li><a href="#unknowns">3. 不明点 (ブリーフから読めない情報)</a></li>
+    <li><a href="#client-questions">4. クライアントへの質問</a></li>
+    <li><a href="#competitor">5. 競合情報 (クイック・スキャン)</a></li>
+    <li><a href="#market">6. 市場情報 (クイック・スキャン)</a></li>
+    <li><a href="#possibilities">7. 検討すべき可能性</a></li>
+    <li><a href="#agent-teams">8. Agent-Teams への引継ぎ</a></li>
   </ol>
   <p style="font-size:11px;color:var(--ink-faint);margin:12px 0 0;">
-    出典は引用箇所のすぐ後ろに小さく表記しています (— 発表元 / 年 / URL)。
+    出典は引用箇所のすぐ後ろに小さく表記。<strong>このブリーフはチーム即始動のためのクイック整理</strong>です。
+    深い吟味は Agent-Teams に引き継ぎ (セクション 8)。
   </p>
 </nav>
 
@@ -574,271 +571,168 @@
 </section>
 
 <!-- ============================================================
-     1. DECODE
+     1. 要約 (30 秒で読む全体像)
      ============================================================ -->
-<section id="decode">
-  <h2>1. ブリーフ・デコード</h2>
+<section id="summary">
+  <h2>1. 要約 — 30 秒で読む全体像</h2>
   <p style="font-size:13px;color:var(--ink-soft);">
-    このセクションは <strong>ブリーフ記載 (黄)</strong> と <strong>リサーチャー解釈</strong> を分けて表記します。
+    この案件で何が起きているか / 何をやるのか / なぜ難しいのか を 3〜5 行で。
+    チームメンバーがここだけ読めば会議に出られる粒度。
   </p>
 
-  <h3>ブリーフ原文の主要記述</h3>
-  <blockquote class="brief-quote">
-    {{ブリーフから直接引用 — 課題 / 背景 / ターゲット / 媒体指定など中核部分を逐語で}}
-  </blockquote>
-
-  <h3>表層課題</h3>
   <div class="from-brief">
-    {{ブリーフに書かれた課題を一文で}}
+    <strong>クライアントの依頼</strong>: {{ブリーフ記載の主旨を 1〜2 行 — クライアントが何を頼んだか}}
   </div>
 
-  <h3>推測される真因 <span class="tag-external">解釈</span></h3>
-  <p style="font-size:12px;color:var(--ink-faint);margin-top:-6px;">
-    ※ 以下はブリーフを読んだ上でのリサーチャー仮説。ブリーフに書かれた事実とは区別。
-  </p>
   <ul>
-    <li>{{真因仮説 1}}</li>
-    <li>{{真因仮説 2}}</li>
+    <li><strong>何を売る・伝える</strong>: {{商品 / サービス / メッセージの一文}}</li>
+    <li><strong>誰に</strong>: {{ターゲットの一文}}</li>
+    <li><strong>いつ・どこで</strong>: {{時期・媒体・接点の一文}}</li>
+    <li><strong>なぜ今</strong>: {{ビジネス背景・社内文脈の一文 <span class="tag-external">解釈</span>}}</li>
+    <li><strong>難所</strong>: {{プランニング上の最大の難所を 1〜2 個 <span class="tag-external">解釈</span>}}</li>
   </ul>
+</section>
 
-  <h3>ターゲット定義</h3>
-  <table>
-    <tr><th><span class="tag-brief">ブリーフ</span> 記載</th><td>{{記載通り}}</td></tr>
-    <tr><th><span class="tag-external">解釈</span> 追加で見るべき層</th><td>{{補足提案}}</td></tr>
-  </table>
+<!-- ============================================================
+     2. 矛盾・課題
+     ============================================================ -->
+<section id="tension-issues" class="tension">
+  <h2>2. 矛盾・課題 — チームで議論すべき論点</h2>
+  <p style="font-size:13px;color:var(--ink-soft);">
+    ブリーフの内側にある不整合・実現性の疑問・優先順位の競合。
+    キックオフで議論すべき "引っかかり" を一覧化。
+  </p>
 
-  <h3>KPI / 成功指標 <span class="tag-brief">ブリーフ</span></h3>
-  <div class="from-brief">{{KPI 記載}}</div>
-
-  <h3>制約条件 <span class="tag-brief">ブリーフ</span></h3>
-  <div class="from-brief">{{予算 / 期間 / 媒体 / 表現 / 法規 — ブリーフ記載分のみ}}</div>
-
-  <h3>違和感・疑問 <span class="tag-external">解釈</span></h3>
   <div class="callout tension">
-    <ul>
-      <li>{{違和感 1 — ブリーフ記述「〇〇」に対してなぜ気になったか}}</li>
-      <li>{{違和感 2}}</li>
-      <li>{{違和感 3}}</li>
-    </ul>
+    <strong>{{矛盾 1 のタイトル}}</strong>
+    <p>{{ブリーフのこの記述「〇〇」と、この記述「△△」が両立しないように見える / または実現性に疑問。<span class="tag-external">解釈</span>}}</p>
   </div>
 
-  <div class="callout sowhat">
-    <p>{{So What ― このセクションから言える 1〜3 行の含意}}</p>
+  <div class="callout tension">
+    <strong>{{矛盾 2 のタイトル}}</strong>
+    <p>{{...}}</p>
+  </div>
+
+  <div class="callout risk">
+    <strong>注意すべきリスク</strong>
+    <ul>
+      <li>{{ブランドセーフティ / 規制 / 炎上リスク — 該当があれば。出典付き <span class="src-inline"><a href="{{URL}}">{{報道元}}</a> ({{YYYY-MM}})</span>}}</li>
+    </ul>
   </div>
 </section>
 
 <!-- ============================================================
-     2. COMPETITOR
+     3. 不明点 (ブリーフから読めない情報)
+     ============================================================ -->
+<section id="unknowns">
+  <h2>3. 不明点 — ブリーフから読み取れない情報</h2>
+  <p style="font-size:13px;color:var(--ink-soft);">
+    ブリーフに書かれておらず、リサーチでも確定できなかった項目。
+    Creative Brief 22 項目の <code>[要確認]</code> セルとも連動。
+  </p>
+  <table>
+    <tr><th>項目</th><th>なぜ必要</th><th>誰に確認</th></tr>
+    <tr><td>{{不明点 1}}</td><td>{{プランに直結する理由}}</td><td>{{クライアント / 社内 / 外部}}</td></tr>
+    <tr><td>{{不明点 2}}</td><td>{{...}}</td><td>{{...}}</td></tr>
+    <tr><td>{{不明点 3}}</td><td>{{...}}</td><td>{{...}}</td></tr>
+  </table>
+</section>
+
+<!-- ============================================================
+     4. クライアントへの質問
+     ============================================================ -->
+<section id="client-questions">
+  <h2>4. クライアントへの質問 — キックオフ前にこれだけは聞きたい</h2>
+  <p style="font-size:13px;color:var(--ink-soft);">
+    確認質問は最大 7 個に絞る。それ以上はクライアントの負担。
+    重要度の高い順で並べ、聞かなくても進められるものは外す。
+  </p>
+  <ol>
+    <li><strong>{{質問 1}}</strong><br><span style="font-size:13px;color:var(--ink-soft);">なぜ聞きたい: {{プラン策定にこう効く}}</span></li>
+    <li><strong>{{質問 2}}</strong><br><span style="font-size:13px;color:var(--ink-soft);">なぜ聞きたい: {{...}}</span></li>
+    <li><strong>{{質問 3}}</strong><br><span style="font-size:13px;color:var(--ink-soft);">なぜ聞きたい: {{...}}</span></li>
+  </ol>
+</section>
+
+<!-- ============================================================
+     5. 競合情報 (サブエージェント・クイック版)
      ============================================================ -->
 <section id="competitor">
-  <h2>2. 競合状況</h2>
+  <h2>5. 競合情報 — クイック・スキャン</h2>
+  <p style="font-size:13px;color:var(--ink-soft);">
+    主要競合 3〜5 社の現在地。深い競合分析は <a href="#agent-teams">Agent-Teams</a> へ。
+  </p>
 
-  <h3>直接競合の主要キャンペーン (直近 24 ヶ月)</h3>
+  <h3>主要競合の現在地 (直近 12〜24 ヶ月)</h3>
   <table>
-    <tr><th>競合</th><th>キャンペーン</th><th>キーメッセージ</th><th>時期</th><th>出典</th></tr>
+    <tr><th>競合</th><th>直近キャンペーン / メッセージ</th><th>ポジション</th><th>出典</th></tr>
     <tr>
-      <td>{{社名}}</td><td>{{キャンペーン名}}</td><td>{{訴求}}</td><td>{{YYYY-MM}}</td>
+      <td>{{社名}}</td><td>{{キャンペーン or 直近訴求}}</td><td>{{機能 / 情緒 / 価格 / 体験}}</td>
       <td style="font-size:12px;"><a href="{{URL}}" target="_blank">{{発表元}}</a> ({{年}})</td>
     </tr>
   </table>
 
-  <h3>ポジショニング比較</h3>
-  <p>{{4象限マップや表で記述}}</p>
-
-  <h3>新興・越境競合</h3>
-  <p>{{D2C、海外勢、隣接カテゴリー}}</p>
-
-  <div class="callout sowhat">
-    <p>{{So What}}</p>
-  </div>
+  <h3>すぐ使える示唆</h3>
+  <ul>
+    <li>{{競合が共通して使っている訴求 → 避けるべき or 差別化の余地}}</li>
+    <li>{{この案件特有の "勝ち筋" 候補 <span class="tag-external">解釈</span>}}</li>
+  </ul>
 </section>
 
 <!-- ============================================================
-     3. MARKET
+     6. 市場情報 (サブエージェント・クイック版)
      ============================================================ -->
 <section id="market">
-  <h2>3. 市場・カテゴリー</h2>
+  <h2>6. 市場情報 — クイック・スキャン</h2>
+  <p style="font-size:13px;color:var(--ink-soft);">
+    意思決定に直結する市場ファクトのみ。詳細な業界レポートは <a href="#agent-teams">Agent-Teams</a> へ。
+  </p>
 
-  <h3>市場規模と成長率</h3>
+  <h3>市場の現在地</h3>
   <p>
     {{市場規模・成長率の本文 — 数値含む}}
     <span class="src-inline"><a href="{{URL}}" target="_blank">{{発表元 / レポート名}}</a> ({{年}})</span>
   </p>
 
-  <h3>構造変化</h3>
-  <p>{{EC化、価格帯シフト、ユーザー層変化}}</p>
-
-  <h3>規制動向</h3>
-  <p>{{該当する規制}}</p>
-
-  <div class="callout sowhat">
-    <p>{{So What}}</p>
-  </div>
-</section>
-
-<!-- ============================================================
-     4. ZEITGEIST
-     ============================================================ -->
-<section id="zeitgeist">
-  <h2>4. 社会の空気 (Zeitgeist)</h2>
-
-  <h3>価値観の潮流</h3>
-  <p>
-    {{調査結果の本文}}
-    <span class="src-inline"><a href="{{URL}}" target="_blank">{{発表元 / 調査名}}</a> ({{年}})</span>
-  </p>
-
-  <h3>関連するバズ / 流行語</h3>
-  <p>{{直近 6〜12 ヶ月のキーワード}}</p>
-
-  <div class="callout sowhat">
-    <p>{{So What}}</p>
-  </div>
-</section>
-
-<!-- ============================================================
-     5. CONSUMER INSIGHT
-     ============================================================ -->
-<section id="consumer">
-  <h2>5. 生活者インサイト</h2>
-
-  <h3>N1 の声 (SNS / レビュー要旨)</h3>
-  <blockquote class="voice">
-    {{要旨引用 (個人特定情報は除く)}}
-    <span class="src">— {{プラットフォーム}} / {{YYYY-MM}}</span>
-  </blockquote>
-
-  <h3>Job to be done / Tension</h3>
-  <div class="callout tension">
-    {{期待と現実のズレ}}
-  </div>
-
-  <h3>購買意思決定要因</h3>
-  <p>{{価格 / 機能 / レビュー / 口コミ等の重みづけ}}</p>
-
-  <div class="callout sowhat">
-    <p>{{So What}}</p>
-  </div>
-</section>
-
-<!-- ============================================================
-     6. BRAND  (該当する場合のみ)
-     ============================================================ -->
-<section id="brand">
-  <h2>6. ブランド現在地</h2>
-
-  <h3>過去キャンペーン棚卸し</h3>
-  <p>{{直近 3〜5 年の主要キャンペーンとその変遷}}</p>
-
-  <h3>想起されている価値・トーン</h3>
-  <p>{{「〇〇と言えば」のスロット}}</p>
-
-  <h3>直近の評判</h3>
-  <p>{{好意 / 否定の傾向}}</p>
-
-  <div class="callout sowhat">
-    <p>{{So What}}</p>
-  </div>
-</section>
-
-<!-- ============================================================
-     7. CULTURE
-     ============================================================ -->
-<section id="culture">
-  <h2>7. カルチャー文脈</h2>
-
-  <h3>関連サブカルチャー / コミュニティ</h3>
-  <p>{{記述}}</p>
-
-  <h3>影響力者 / メディア生態系</h3>
-  <p>{{KOL、Podcast、Newsletter 等}}</p>
-
-  <div class="callout sowhat">
-    <p>{{So What}}</p>
-  </div>
-</section>
-
-<!-- ============================================================
-     8. WHITE SPACE
-     ============================================================ -->
-<section id="whitespace">
-  <h2>8. 機会領域 (White Space)</h2>
-
+  <h3>構造変化・規制</h3>
   <ul>
-    <li>{{未充足ニーズ}}</li>
-    <li>{{隣接カテゴリー越境}}</li>
-    <li>{{利用シーン拡張}}</li>
+    <li>{{チャネルシフト / 価格帯シフト / 規制動向 — 出典付き}}</li>
   </ul>
 
-  <div class="callout sowhat">
-    <p>{{So What}}</p>
-  </div>
+  <h3>すぐ使える示唆</h3>
+  <ul>
+    <li>{{この案件タイミングで効きそうな追い風 or 向かい風 <span class="tag-external">解釈</span>}}</li>
+  </ul>
 </section>
 
 <!-- ============================================================
-     9. RISK
+     7. 検討すべき可能性
      ============================================================ -->
-<section id="risk">
-  <h2>9. リスク・地雷</h2>
-
-  <div class="callout risk">
-    <ul>
-      <li>
-        {{過去の炎上事例の要旨}}
-        <span class="src-inline"><a href="{{URL}}" target="_blank">{{報道元}}</a> ({{YYYY-MM}})</span>
-      </li>
-      <li>
-        {{規制リスクの要旨}}
-        <span class="src-inline"><a href="{{URL}}" target="_blank">{{規制の根拠条文 / 公式ガイドライン}}</a></span>
-      </li>
-      <li>{{ブランドセーフティ — 出典が必要なら同上記法}}</li>
-      <li>{{競合被り}}</li>
-    </ul>
-  </div>
-</section>
-
-<!-- ============================================================
-     10. CROSS-DOMAIN TENSION
-     ============================================================ -->
-<section id="tension" class="tension">
-  <h2>10. 領域横断テンション</h2>
-  <p>市場・競合・社会・生活者を横断したときに浮かぶ <strong>矛盾</strong> と <strong>違和感</strong>。プランニングの出発点になる発見。</p>
-
-  <div class="callout tension">
-    <strong>{{テンション 1 のタイトル}}</strong>
-    <p>{{記述 ― 例: 市場は伸びているが SNS は冷めている}}</p>
-  </div>
-
-  <div class="callout tension">
-    <strong>{{テンション 2 のタイトル}}</strong>
-    <p>{{記述}}</p>
-  </div>
-</section>
-
-<!-- ============================================================
-     11. HYPOTHESIS SEEDS
-     ============================================================ -->
-<section id="hypothesis">
-  <h2>11. 仮説の種 (プランナーへの引き継ぎカード)</h2>
-  <p><em>※ これは結論ではなく、プランニング・チームが次に動ける問いの形にしたもの。広告プランは別チームの仕事。</em></p>
+<section id="possibilities">
+  <h2>7. 検討すべき可能性 — 議論論点</h2>
+  <p style="font-size:13px;color:var(--ink-soft);">
+    プランナーが議論する入口として、3〜5 個の "可能性" を提示。
+    結論は出さず、各可能性に「根拠 / 機会 / 検証方法」を添える。
+    <strong>キャッチコピー / KV / 企画案などの完成形は書かない</strong> (別チームの仕事)。
+  </p>
 
   <div class="hypothesis">
-    <h4>仮説 #1: {{一文の仮説}}</h4>
+    <h4>可能性 #1: {{一文}}</h4>
     <dl>
       <dt>根拠 (ブリーフ)</dt>
-      <dd><span class="tag-brief">ブリーフ</span> {{ブリーフのどの記述から導いたか — 該当箇所を逐語で}}</dd>
+      <dd><span class="tag-brief">ブリーフ</span> {{ブリーフのどの記述から}}</dd>
       <dt>根拠 (外部)</dt>
       <dd>
         <span class="tag-external">外部</span> {{Web / 統計 / 業界レポートからの裏付け}}
         <span class="src-inline"><a href="{{URL}}" target="_blank">{{発表元}}</a> ({{年}})</span>
       </dd>
-      <dt>想定機会</dt><dd>{{この仮説が当たった場合に開く可能性}}</dd>
-      <dt>検証方法</dt><dd>{{定量調査 / N1 インタビュー / A/B 等}}</dd>
+      <dt>想定機会</dt><dd>{{この方向が当たった場合に開く可能性}}</dd>
+      <dt>検証方法</dt><dd>{{次にどう確かめるか — Agent-Teams への依頼 / 定量調査 / N1 等}}</dd>
     </dl>
   </div>
 
   <div class="hypothesis">
-    <h4>仮説 #2: {{一文の仮説}}</h4>
+    <h4>可能性 #2: {{一文}}</h4>
     <dl>
       <dt>根拠 (ブリーフ)</dt><dd><span class="tag-brief">ブリーフ</span> {{...}}</dd>
       <dt>根拠 (外部)</dt>
@@ -853,16 +747,26 @@
 </section>
 
 <!-- ============================================================
-     12. OPEN QUESTIONS
+     8. Agent-Teams への引継ぎ
      ============================================================ -->
-<section id="open">
-  <h2>12. 未解決の問い</h2>
-  <p>追加調査やクライアント確認が必要な論点。</p>
-  <ul>
-    <li>{{問い 1}}</li>
-    <li>{{問い 2}}</li>
-    <li>{{問い 3}}</li>
-  </ul>
+<section id="agent-teams">
+  <h2>8. Agent-Teams への引継ぎ — 深掘り依頼リスト</h2>
+  <p style="font-size:13px;color:var(--ink-soft);">
+    この Super-Brief は <strong>チーム即始動のためのクイック整理</strong>。
+    以下の論点は <strong>Agent-Teams 側で深く吟味</strong> する。
+  </p>
+  <table>
+    <tr><th>領域</th><th>依頼内容</th><th>優先度</th></tr>
+    <tr><td>社会の空気 / Zeitgeist</td><td>{{この案件で深掘りすべき価値観・トレンド}}</td><td>{{高/中/低}}</td></tr>
+    <tr><td>生活者インサイト (N1)</td><td>{{ターゲットの声を集めるべき切り口}}</td><td>{{...}}</td></tr>
+    <tr><td>ブランド現在地</td><td>{{過去施策の棚卸し / 認知好意度の検証}}</td><td>{{...}}</td></tr>
+    <tr><td>カルチャー文脈</td><td>{{関連サブカルチャー / 影響力者の精査}}</td><td>{{...}}</td></tr>
+    <tr><td>機会領域 (White Space)</td><td>{{未充足ニーズ / 隣接カテゴリーの探索}}</td><td>{{...}}</td></tr>
+    <tr><td>リスク・地雷の詳細</td><td>{{過去の炎上事例 / 規制の精査}}</td><td>{{...}}</td></tr>
+  </table>
+  <p style="font-size:12px;color:var(--ink-faint);margin-top:14px;">
+    各依頼はこの Super-Brief を入力として、Agent-Teams のリサーチャーが N1 / 業界統計 / 過去キャンペーン分析などで深堀りする想定。
+  </p>
 </section>
 
 <hr>

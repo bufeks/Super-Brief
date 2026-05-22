@@ -45,6 +45,9 @@ def repo_paths_are_config_only(repo, paths):
     )
     config_files = {
         "CLAUDE.md", "README.md", ".gitignore", "requirements.txt",
+        # reports/.gitkeep is the placeholder that keeps reports/ in the tree;
+        # actual research output (reports/*.html) is gitignored.
+        "reports/.gitkeep",
     }
     for p in paths:
         if p in config_files:
@@ -127,8 +130,11 @@ if tool == "Bash":
     sys.exit(0)
 
 # ---- GitHub MCP guard ----
+# `create_pull_request` itself is safe to allow: the underlying file
+# changes are already gated by Write (local), Bash git ops, and the
+# remaining MCP file-write tools below. A PR with brief content can
+# only exist if those guards were bypassed — and they aren't.
 github_blocked = {
-    "mcp__github__create_pull_request",
     "mcp__github__push_files",
     "mcp__github__create_or_update_file",
     "mcp__github__delete_file",
