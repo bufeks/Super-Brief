@@ -74,6 +74,28 @@ def git_staged_or_changed(repo):
     except Exception:
         return []
 
+def git_unpushed_files(repo):
+    """Files changed in commits ahead of the tracked remote — relevant for `git push`."""
+    import subprocess
+    try:
+        branch = subprocess.check_output(
+            ["git", "-C", repo, "rev-parse", "--abbrev-ref", "HEAD"],
+            stderr=subprocess.DEVNULL,
+        ).decode().strip()
+        upstream = subprocess.check_output(
+            ["git", "-C", repo, "rev-parse", "--abbrev-ref", "--symbolic-full-name",
+             "@{u}"],
+            stderr=subprocess.DEVNULL,
+        ).decode().strip()
+        out = subprocess.check_output(
+            ["git", "-C", repo, "log", "--name-only", "--pretty=format:",
+             f"{upstream}..HEAD"],
+            stderr=subprocess.DEVNULL,
+        ).decode().splitlines()
+        return list({p for p in out if p.strip()})
+    except Exception:
+        return []
+
 if tool == "Bash":
     cmd = (params.get("command") or "").strip()
     patterns = [
@@ -86,7 +108,13 @@ if tool == "Bash":
     for pat, name in patterns:
         if re.search(pat, cmd):
             repo = "/home/user/Super-Brief"
-            paths = git_staged_or_changed(repo)
+            # For `git push`, the relevant files are unpushed commits, not
+            # staged changes (which are empty post-commit). For everything
+            # else, use staged + unstaged + untracked.
+            if "push" in name:
+                paths = git_unpushed_files(repo)
+            else:
+                paths = git_staged_or_changed(repo)
             if paths and repo_paths_are_config_only(repo, paths):
                 # Config-only iteration — allow.
                 sys.exit(0)
