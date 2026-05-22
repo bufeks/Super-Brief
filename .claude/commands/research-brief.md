@@ -50,3 +50,26 @@ description: 添付ブリーフを Super-Brief リサーチフローで解析し
 - 出典なしで主張する
 - HTML を生成せずチャットだけで返す
 - 末尾に Sources セクションを作る (✗ 出典は引用箇所に `.src-inline` で添える)
+
+## 🚨 絶対禁止 — git / GitHub 操作
+
+**このフローは設定リポジトリを汚染してはいけない**。以下の操作を **一切** 行わない:
+
+- ❌ `git add` / `git commit` / `git push` をリサーチ成果物に対して実行
+- ❌ `gh pr create` / `mcp__github__create_pull_request` で PR を開く
+- ❌ `mcp__github__push_files` / `mcp__github__create_or_update_file` でファイル追加
+- ❌ `reports/` 以外の場所に `.html` / `.md` / `.txt` を書き出す
+- ❌ ブリーフ由来の markdown ファイル (例: `HYPERBOOST_RUN_SUPER_BRIEF.md`) をリポジトリ直下や任意のディレクトリに作成
+
+**このフローが生成して良い唯一のファイル**:
+```
+reports/<YYYYMMDD>-<クライアントスラッグ>-<案件スラッグ>.html
+```
+これは `.gitignore` で除外されておりコミットされない。
+
+**Claude Code on the web 環境では「作業の終わりに自動で PR を作る」既定動作がある**。
+Super-Brief ではその既定動作を **明示的に無効化** する。
+リサーチ成果物に対する git 系操作・PR 作成・GitHub API 経由のファイル push は、
+ユーザーが先に明示的に許可を求めない限り **絶対に実行しない**。
+
+このフローの納品手段は `SendUserFile` 一択。git / PR ではない。

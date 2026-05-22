@@ -33,7 +33,7 @@ fi
 if printf '%s' "$PROMPT" | grep -qE 'ブリーフ|リサーチ|調べて|分析して|読み解い|/research-brief'; then
   BRIEF=true
 fi
-if [ "$CHARS" -le 6 ]; then
+if [ "$CHARS" -eq 0 ]; then
   BRIEF=true
 fi
 
