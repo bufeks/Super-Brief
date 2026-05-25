@@ -23,7 +23,7 @@ set -euo pipefail
 # brief call runs clean. Install output goes to stderr to keep the
 # reminder block on stdout uncluttered.
 MISSING=()
-for pkg in pypdf python-pptx python-docx cryptography; do
+for pkg in pypdf python-pptx python-docx cryptography cffi; do
   if ! pip show "$pkg" >/dev/null 2>&1; then
     MISSING+=("$pkg")
   fi

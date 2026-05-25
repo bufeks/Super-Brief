@@ -5,3 +5,8 @@ python-docx>=1.1
 # briefs ship encrypted). Without it, extract.py raises a confusing
 # DependencyError that earlier fresh sessions had to work around.
 cryptography>=41.0
+# cffi is cryptography's C-binding backend. Normally pulled in via
+# cryptography's wheel, but some fresh Claude Code on the web sessions
+# observed it missing on first import. Listing it explicitly avoids
+# the second-round install the model otherwise has to do.
+cffi>=1.16
