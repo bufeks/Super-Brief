@@ -20,6 +20,17 @@ def extract_pdf(path: Path) -> str:
     from pypdf import PdfReader
 
     reader = PdfReader(str(path))
+    # Some agency briefs ship with an empty-password encryption that
+    # pypdf can decrypt silently if `cryptography` is installed.
+    if reader.is_encrypted:
+        try:
+            reader.decrypt("")
+        except Exception as e:
+            raise RuntimeError(
+                f"PDF is encrypted and cannot be decrypted: {e}. "
+                "Install `cryptography` (pip install cryptography) "
+                "or ask the user for an unprotected version."
+            ) from e
     parts: list[str] = []
     for i, page in enumerate(reader.pages, 1):
         text = page.extract_text() or ""

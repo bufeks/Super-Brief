@@ -6,21 +6,43 @@
 # strong, top-of-conversation reminder that turns brief-attach +
 # empty-body into an unconditional /research-brief invocation.
 #
-# Also does a soft dependency check for the brief-extraction parsers.
-# Does NOT install anything — install is the user's call.
+# Also auto-installs the brief-extraction parsers when missing so the
+# first /research-brief call doesn't fail with ModuleNotFoundError.
+# Includes cryptography for AES-encrypted PDFs (some adidas-style
+# briefs ship with PDF encryption that pypdf can't open without it).
 
 set -euo pipefail
 
 # Only meaningful in remote (Claude Code on the web) environments.
 # Local runs may want the reminder too, so don't gate on remote here.
 
-# ---- Soft dependency check ---------------------------------------
+# ---- Auto-install brief-extraction deps --------------------------
+# Live test showed scripts/extract.py fail on a fresh session because
+# the parsers weren't installed yet; the model had to scramble for a
+# workaround. Install once per session (idempotent) so the first
+# brief call runs clean. Install output goes to stderr to keep the
+# reminder block on stdout uncluttered.
 MISSING=()
-for pkg in pypdf python-pptx python-docx; do
+for pkg in pypdf python-pptx python-docx cryptography; do
   if ! pip show "$pkg" >/dev/null 2>&1; then
     MISSING+=("$pkg")
   fi
 done
+
+if [ "${#MISSING[@]}" -gt 0 ]; then
+  {
+    echo "[Super-Brief] ブリーフ抽出用パッケージをインストール中: ${MISSING[*]}"
+    if pip install --quiet --disable-pip-version-check "${MISSING[@]}"; then
+      echo "[Super-Brief] インストール完了。"
+      INSTALL_OK=true
+    else
+      echo "[Super-Brief] ⚠️ 自動インストール失敗。手動で: pip install -r requirements.txt"
+      INSTALL_OK=false
+    fi
+  } >&2
+else
+  INSTALL_OK=true
+fi
 
 # ---- Reminder injected into session context ----------------------
 cat <<'EOF'
@@ -83,10 +105,10 @@ cat <<'EOF'
 ================================================================
 EOF
 
-if [ "${#MISSING[@]}" -gt 0 ]; then
+if [ "${INSTALL_OK:-true}" != "true" ]; then
   cat <<EOF
-⚠️  ブリーフ抽出用パッケージ未インストール: ${MISSING[*]}
-    PDF / PPTX / DOCX を扱う場合は以下を実行:
+⚠️  ブリーフ抽出用パッケージの自動インストールに失敗: ${MISSING[*]}
+    PDF / PPTX / DOCX を扱う場合は手動で以下を実行:
       pip install -r requirements.txt
     (テキスト / Markdown のみなら不要)
 

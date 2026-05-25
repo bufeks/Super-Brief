@@ -1,3 +1,7 @@
 pypdf>=4.0
 python-pptx>=0.6.23
 python-docx>=1.1
+# cryptography is needed by pypdf for AES-encrypted PDFs (some agency
+# briefs ship encrypted). Without it, extract.py raises a confusing
+# DependencyError that earlier fresh sessions had to work around.
+cryptography>=41.0
